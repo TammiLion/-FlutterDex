@@ -1,6 +1,6 @@
-# isekai_grinder
+# FlutterDex
 
-Experience your own Isekai story
+An exploration of Flutter architecture in the form of a Pokedex.
 
 ## Getting Started
 
