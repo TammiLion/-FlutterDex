@@ -1,4 +1,4 @@
-package com.example.isekai_grinder
+package com.tammidev.flutterdex
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -6,9 +6,9 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:isekai_grinder/bottomsheet.dart';
-import 'package:isekai_grinder/data/Pokemon.dart';
-import 'package:isekai_grinder/network/api/PokeApi.dart';
+import 'package:flutterdex/bottomsheet.dart';
+import 'package:flutterdex/data/Pokemon.dart';
+import 'package:flutterdex/network/api/PokeApi.dart';
 import 'package:logger/logger.dart';
 
 import 'network/data/NetworkResource.dart';
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final wordPair = WordPair.random();
-    return MaterialApp(title: 'Welcome to Flutter', home: RandomWords());
+    return MaterialApp(title: 'FlutterDex', home: RandomWords());
   }
 }
 

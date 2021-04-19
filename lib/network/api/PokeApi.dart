@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:isekai_grinder/data/Pokemon.dart';
+import 'package:flutterdex/data/Pokemon.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'PokeApi.g.dart';
