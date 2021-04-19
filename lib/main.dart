@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdex/bottomsheet.dart';
 import 'package:flutterdex/data/Pokemon.dart';
@@ -36,6 +37,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/*
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: RandomWords());
+  }
+}
+*/
 class RandomWords extends StatefulWidget {
   @override
   _RandomWordsState createState() => _RandomWordsState();
@@ -51,14 +62,14 @@ class _RandomWordsState extends State<RandomWords> {
         title: Text(networkResource.when(
             (Pokemon data) => data.name ?? "missingno",
             loading: () => "loading",
-            error: (String? message) => message ?? "errorNull")).tr(),
+            error: (String? message) => message ?? "errorNull")),
       ),
       body: Container(
         child: Column(
           children: <Widget>[
             TextButton(
               child: Text(
-                "Nav",
+                LocaleKeys.msg.tr(),
                 style: GoogleFonts.roboto(),
               ),
               onPressed: () {
