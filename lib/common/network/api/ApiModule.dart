@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutterdex/network/api/PokeApi.dart';
+import 'package:flutterdex/common/network/api/PokeApi.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mockito/mockito.dart';
 

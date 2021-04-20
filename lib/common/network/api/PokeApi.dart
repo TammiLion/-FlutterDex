@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutterdex/data/Pokemon.dart';
+import 'package:flutterdex/common/data/Pokemon.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:flutterdex/data/PokemonPage.dart';
+import 'package:flutterdex/common/data/PokemonPage.dart';
 
 part 'PokeApi.g.dart';
 

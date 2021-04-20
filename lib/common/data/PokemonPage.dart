@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutterdex/data/NamedApiResource.dart';
+import 'package:flutterdex/common/data/NamedApiResource.dart';
 
 part 'PokemonPage.freezed.dart';
 part 'PokemonPage.g.dart';
