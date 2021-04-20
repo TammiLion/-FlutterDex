@@ -8,7 +8,7 @@ part of 'PokeApi.dart';
 
 class _PokeApi implements PokeApi {
   _PokeApi(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'https://pokeapi.co/api/v2/';
+    baseUrl ??= 'https://pokeapi.co/api/v2';
   }
 
   final Dio _dio;
@@ -23,7 +23,7 @@ class _PokeApi implements PokeApi {
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Pokemon>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, 'pokemon/$name',
+                .compose(_dio.options, '/pokemon/$name',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = Pokemon.fromJson(_result.data!);
@@ -31,17 +31,32 @@ class _PokeApi implements PokeApi {
   }
 
   @override
-  Future<Pokemon> getPokemon(id) async {
+  Future<Pokemon> getPokemonById(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Pokemon>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, 'pokemon/$id',
+                .compose(_dio.options, '/pokemon/$id',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = Pokemon.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PokemonPage> getPokemonPage(offset) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'offset': offset};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PokemonPage>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/pokemon',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PokemonPage.fromJson(_result.data!);
     return value;
   }
 

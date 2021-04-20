@@ -13,6 +13,7 @@ import 'package:logger/logger.dart';
 import 'network/data/NetworkResource.dart';
 
 void main() async {
+  //configureInjection(Environment.dev);
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
@@ -20,7 +21,6 @@ void main() async {
     EasyLocalization(
         supportedLocales: [Locale('en'), Locale('nl')],
         path: 'assets/translations',
-        // <-- change the path of the translation files
         fallbackLocale: Locale('en'),
         child: MyApp()),
   );
@@ -37,16 +37,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/*
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(home: RandomWords());
-  }
-}
-*/
 class RandomWords extends StatefulWidget {
   @override
   _RandomWordsState createState() => _RandomWordsState();
@@ -108,8 +98,10 @@ class _RandomWordsState extends State<RandomWords> {
     final dio = Dio(); // Provide a dio instance
     dio.options.headers["Demo-Header"] =
         "demo header"; // config your dio headers globally
-    dio.interceptors.add(LogInterceptor(responseBody: false));
+    dio.interceptors.add(LogInterceptor(responseBody: true));
     final client = PokeApi(dio);
+
+    client.getPokemonPage(0).then((value) => null);
 
     client.getPokemonByName("ditto").then((it) {
       log.i(it);
