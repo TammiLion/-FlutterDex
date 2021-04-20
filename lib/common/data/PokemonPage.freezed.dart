@@ -23,7 +23,7 @@ class _$PokemonPageTearOff {
   _PokemonPage call(
       {int? count,
       String? next,
-      bool? previous,
+      String? previous,
       List<NamedApiResource>? results}) {
     return _PokemonPage(
       count: count,
@@ -45,7 +45,7 @@ const $PokemonPage = _$PokemonPageTearOff();
 mixin _$PokemonPage {
   int? get count => throw _privateConstructorUsedError;
   String? get next => throw _privateConstructorUsedError;
-  bool? get previous => throw _privateConstructorUsedError;
+  String? get previous => throw _privateConstructorUsedError;
   List<NamedApiResource>? get results => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -62,7 +62,7 @@ abstract class $PokemonPageCopyWith<$Res> {
   $Res call(
       {int? count,
       String? next,
-      bool? previous,
+      String? previous,
       List<NamedApiResource>? results});
 }
 
@@ -93,7 +93,7 @@ class _$PokemonPageCopyWithImpl<$Res> implements $PokemonPageCopyWith<$Res> {
       previous: previous == freezed
           ? _value.previous
           : previous // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as String?,
       results: results == freezed
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ abstract class _$PokemonPageCopyWith<$Res>
   $Res call(
       {int? count,
       String? next,
-      bool? previous,
+      String? previous,
       List<NamedApiResource>? results});
 }
 
@@ -145,7 +145,7 @@ class __$PokemonPageCopyWithImpl<$Res> extends _$PokemonPageCopyWithImpl<$Res>
       previous: previous == freezed
           ? _value.previous
           : previous // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as String?,
       results: results == freezed
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
@@ -168,7 +168,7 @@ class _$_PokemonPage with DiagnosticableTreeMixin implements _PokemonPage {
   @override
   final String? next;
   @override
-  final bool? previous;
+  final String? previous;
   @override
   final List<NamedApiResource>? results;
 
@@ -226,7 +226,7 @@ abstract class _PokemonPage implements PokemonPage {
   factory _PokemonPage(
       {int? count,
       String? next,
-      bool? previous,
+      String? previous,
       List<NamedApiResource>? results}) = _$_PokemonPage;
 
   factory _PokemonPage.fromJson(Map<String, dynamic> json) =
@@ -237,7 +237,7 @@ abstract class _PokemonPage implements PokemonPage {
   @override
   String? get next => throw _privateConstructorUsedError;
   @override
-  bool? get previous => throw _privateConstructorUsedError;
+  String? get previous => throw _privateConstructorUsedError;
   @override
   List<NamedApiResource>? get results => throw _privateConstructorUsedError;
   @override

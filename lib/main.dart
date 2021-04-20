@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdex/common/di/injection.dart';
+import 'file:///C:/Users/tamar/Documents/Programming/Android/isekai_grinder/lib/home/presentation/HomePage.dart';
 import 'package:injectable/injectable.dart';
 
 void main() async {
@@ -25,24 +26,5 @@ class MyApp extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
         home: HomePage());
-  }
-}
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("FlutterDex"),
-      ),
-      body: Container(
-        child: Image.asset("assets/images/furniture_spritesheet.png"),
-      ),
-    );
   }
 }

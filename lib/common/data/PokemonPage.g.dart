@@ -10,7 +10,7 @@ _$_PokemonPage _$_$_PokemonPageFromJson(Map<String, dynamic> json) {
   return _$_PokemonPage(
     count: json['count'] as int?,
     next: json['next'] as String?,
-    previous: json['previous'] as bool?,
+    previous: json['previous'] as String?,
     results: (json['results'] as List<dynamic>?)
         ?.map((e) => NamedApiResource.fromJson(e as Map<String, dynamic>))
         .toList(),

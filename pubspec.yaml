@@ -28,20 +28,15 @@ dependencies:
   #fonts
   google_fonts: ^2.0.0
 
-  #aws amplify
-  amplify_flutter: ^0.1.0
-  amplify_auth_cognito: ^0.1.0
-  amplify_analytics_pinpoint: ^0.1.0
-
   #arch
   flutter_bloc: ^7.0.0
   auto_route: ^1.0.2
 
-  #common.di
+  #di
   get_it: ^6.0.0
   injectable: ^1.2.2
 
-  #common.network
+  #network
   http: ^0.13.1
   dio: ^4.0.0
   retrofit:

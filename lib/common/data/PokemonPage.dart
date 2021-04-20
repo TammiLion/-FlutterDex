@@ -7,7 +7,7 @@ part 'PokemonPage.g.dart';
 
 @freezed
 class PokemonPage with _$PokemonPage {
-  factory PokemonPage({int? count, String? next, bool? previous, List<NamedApiResource>? results}) = _PokemonPage;
+  factory PokemonPage({int? count, String? next, String? previous, List<NamedApiResource>? results}) = _PokemonPage;
   
   factory PokemonPage.fromJson(Map<String, dynamic> json) => _$PokemonPageFromJson(json);
 }
