@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 @injectable
 class HomeBloc extends Cubit<HomeState> {
   final PokemonPageRepository _repo;
-  NetworkResource<PokemonPage>? _lastResponse;
+  List<String> names = [];
   int offset = 0;
 
   HomeBloc(this._repo) : super(HomeState()) {
@@ -48,6 +48,7 @@ class HomeBloc extends Cubit<HomeState> {
             .map((element) => element.name!)
             .toList(growable: false) ??
         [];
-    return HomeState(resource: NetworkResource(list));
+    names += list;
+    return HomeState(resource: NetworkResource(names));
   }
 }

@@ -41,18 +41,22 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildList(List<String> names) {
     return ListView.builder(
-        padding: const EdgeInsets.all(16),
+        itemCount: names.length,
         itemBuilder: (BuildContext _context, int i) {
-          if (i >= names.length) {
+          if (i >= names.length - 1) {
             cubit.scrolledToEnd();
           }
-          return _buildRow(names[i]);
+          return _buildRow(names[i], i);
         });
   }
 
-  Widget _buildRow(String name) {
-    return ListTile(
+  Widget _buildRow(String name, int pos) {
+    return InkWell(
+        child: ListTile(
       title: Text(name),
-    );
+      onTap: () {
+        cubit.clickedPokemon(pos);
+      },
+    ));
   }
 }
