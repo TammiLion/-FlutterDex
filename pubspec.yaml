@@ -37,11 +37,11 @@ dependencies:
   flutter_bloc: ^7.0.0
   auto_route: ^1.0.2
 
-  #di
+  #common.di
   get_it: ^6.0.0
   injectable: ^1.2.2
 
-  #network
+  #common.network
   http: ^0.13.1
   dio: ^4.0.0
   retrofit:
