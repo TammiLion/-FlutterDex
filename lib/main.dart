@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutterdex/di/injection.dart';
+import 'package:injectable/injectable.dart';
 import 'generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdex/bottomsheet.dart';
@@ -13,7 +15,7 @@ import 'package:logger/logger.dart';
 import 'network/data/NetworkResource.dart';
 
 void main() async {
-  //configureInjection(Environment.dev);
+  configureDependencies(Environment.dev);
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
