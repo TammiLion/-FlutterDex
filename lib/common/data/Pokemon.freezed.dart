@@ -116,8 +116,8 @@ class __$PokemonCopyWithImpl<$Res> extends _$PokemonCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_Pokemon with DiagnosticableTreeMixin implements _Pokemon {
-  _$_Pokemon({this.id, this.name});
+class _$_Pokemon extends _Pokemon with DiagnosticableTreeMixin {
+  _$_Pokemon({this.id, this.name}) : super._();
 
   factory _$_Pokemon.fromJson(Map<String, dynamic> json) =>
       _$_$_PokemonFromJson(json);
@@ -168,8 +168,9 @@ class _$_Pokemon with DiagnosticableTreeMixin implements _Pokemon {
   }
 }
 
-abstract class _Pokemon implements Pokemon {
+abstract class _Pokemon extends Pokemon {
   factory _Pokemon({int? id, String? name}) = _$_Pokemon;
+  _Pokemon._() : super._();
 
   factory _Pokemon.fromJson(Map<String, dynamic> json) = _$_Pokemon.fromJson;
 

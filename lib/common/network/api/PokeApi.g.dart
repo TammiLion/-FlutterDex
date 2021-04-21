@@ -46,17 +46,20 @@ class _PokeApi implements PokeApi {
   }
 
   @override
-  Future<PokemonPage> getPokemonPage(offset) async {
+  Future<PokeApiPage> getPokemonPage(offset, limit) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'offset': offset};
+    final queryParameters = <String, dynamic>{
+      r'offset': offset,
+      r'limit': limit
+    };
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PokemonPage>(
+        _setStreamType<PokeApiPage>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/pokemon',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PokemonPage.fromJson(_result.data!);
+    final value = PokeApiPage.fromJson(_result.data!);
     return value;
   }
 

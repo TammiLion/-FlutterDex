@@ -1,31 +1,28 @@
 import 'dart:async';
 
-import 'package:flutterdex/common/data/PokemonPage.dart';
-import 'package:flutterdex/common/network/api/PokeApi.dart';
+import 'package:flutterdex/common/data/PokeApiPage.dart';
 import 'package:flutterdex/common/network/data/NetworkResource.dart';
+import 'package:flutterdex/generated/locale_keys.g.dart';
+import 'package:flutterdex/home/network/PokemonPageDataSource.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class PokemonPageRepository {
-  final PokeApi _pokeApi;
+  final PokeApiPageDataSource _networkDataSource;
+  final PokeApiPageDataSource _cache;
 
-  PokemonPageRepository(this._pokeApi);
+  PokemonPageRepository(
+      @Named("network") this._networkDataSource, @Named("local") this._cache);
 
-  Stream<NetworkResource<PokemonPage>> stream() => _page.stream;
-  StreamController<NetworkResource<PokemonPage>> _page = StreamController();
-
-  void getPage(int offset) async {
-    _page.add(NetworkResource.loading());
-    try {
-      final response = await _pokeApi.getPokemonPage(offset);
-      _page.add(NetworkResource(response));
-    } on Exception catch (e) {
-      _page.add(NetworkResource.error(e.toString()));
+  Stream<NetworkResource<PokeApiPage>> getPage(int offset) async* {
+    PokeApiPage? page = await _cache.getPage(offset);
+    if (page == null) {
+      yield NetworkResource.loading();
+      page = await _networkDataSource.getPage(offset);
+      if (page != null) {
+        yield NetworkResource(page.copyWith(offset: offset));
+      }
     }
-  }
-
-  @disposeMethod
-  void dispose() {
-    _page.close();
+    yield NetworkResource.error(LocaleKeys.error);
   }
 }

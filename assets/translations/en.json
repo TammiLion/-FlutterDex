@@ -6,5 +6,6 @@
     "male":"Hi man ;) {}",
     "female":"Hello girl :) {}",
     "other":"Hello {}"
-  }
+  },
+  "error": "An error occured"
 }

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutterdex/common/data/Pokemon.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:flutterdex/common/data/PokemonPage.dart';
+import 'package:flutterdex/common/data/PokeApiPage.dart';
 
 part 'PokeApi.g.dart';
 
@@ -16,6 +16,6 @@ abstract class PokeApi {
   Future<Pokemon> getPokemonById(@Path("id") int id);
 
   @GET("/pokemon")
-  Future<PokemonPage> getPokemonPage(@Query("offset") int offset);
+  Future<PokeApiPage> getPokemonPage(@Query("offset") int offset, @Query("limit") int limit);
 }
 

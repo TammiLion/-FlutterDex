@@ -123,10 +123,9 @@ class __$NamedApiResourceCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_NamedApiResource
-    with DiagnosticableTreeMixin
-    implements _NamedApiResource {
-  _$_NamedApiResource({this.name, this.url});
+class _$_NamedApiResource extends _NamedApiResource
+    with DiagnosticableTreeMixin {
+  _$_NamedApiResource({this.name, this.url}) : super._();
 
   factory _$_NamedApiResource.fromJson(Map<String, dynamic> json) =>
       _$_$_NamedApiResourceFromJson(json);
@@ -177,8 +176,9 @@ class _$_NamedApiResource
   }
 }
 
-abstract class _NamedApiResource implements NamedApiResource {
+abstract class _NamedApiResource extends NamedApiResource {
   factory _NamedApiResource({String? name, String? url}) = _$_NamedApiResource;
+  _NamedApiResource._() : super._();
 
   factory _NamedApiResource.fromJson(Map<String, dynamic> json) =
       _$_NamedApiResource.fromJson;

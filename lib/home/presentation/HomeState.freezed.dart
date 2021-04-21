@@ -16,9 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$HomeStateTearOff {
   const _$HomeStateTearOff();
 
-  _HomeState call({NetworkResource<List<String>>? resource}) {
+  _HomeState call(
+      {ListViewData? list, InfoViewData? loading, InfoViewData? error}) {
     return _HomeState(
-      resource: resource,
+      list: list,
+      loading: loading,
+      error: error,
     );
   }
 }
@@ -28,8 +31,9 @@ const $HomeState = _$HomeStateTearOff();
 
 /// @nodoc
 mixin _$HomeState {
-  NetworkResource<List<String>>? get resource =>
-      throw _privateConstructorUsedError;
+  ListViewData? get list => throw _privateConstructorUsedError;
+  InfoViewData? get loading => throw _privateConstructorUsedError;
+  InfoViewData? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -40,9 +44,7 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
-  $Res call({NetworkResource<List<String>>? resource});
-
-  $NetworkResourceCopyWith<List<String>, $Res>? get resource;
+  $Res call({ListViewData? list, InfoViewData? loading, InfoViewData? error});
 }
 
 /// @nodoc
@@ -55,26 +57,24 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? resource = freezed,
+    Object? list = freezed,
+    Object? loading = freezed,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
-      resource: resource == freezed
-          ? _value.resource
-          : resource // ignore: cast_nullable_to_non_nullable
-              as NetworkResource<List<String>>?,
+      list: list == freezed
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as ListViewData?,
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as InfoViewData?,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as InfoViewData?,
     ));
-  }
-
-  @override
-  $NetworkResourceCopyWith<List<String>, $Res>? get resource {
-    if (_value.resource == null) {
-      return null;
-    }
-
-    return $NetworkResourceCopyWith<List<String>, $Res>(_value.resource!,
-        (value) {
-      return _then(_value.copyWith(resource: value));
-    });
   }
 }
 
@@ -84,10 +84,7 @@ abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
           _HomeState value, $Res Function(_HomeState) then) =
       __$HomeStateCopyWithImpl<$Res>;
   @override
-  $Res call({NetworkResource<List<String>>? resource});
-
-  @override
-  $NetworkResourceCopyWith<List<String>, $Res>? get resource;
+  $Res call({ListViewData? list, InfoViewData? loading, InfoViewData? error});
 }
 
 /// @nodoc
@@ -101,41 +98,72 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? resource = freezed,
+    Object? list = freezed,
+    Object? loading = freezed,
+    Object? error = freezed,
   }) {
     return _then(_HomeState(
-      resource: resource == freezed
-          ? _value.resource
-          : resource // ignore: cast_nullable_to_non_nullable
-              as NetworkResource<List<String>>?,
+      list: list == freezed
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
+              as ListViewData?,
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
+              as InfoViewData?,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as InfoViewData?,
     ));
   }
 }
 
 /// @nodoc
-class _$_HomeState implements _HomeState {
-  _$_HomeState({this.resource});
+class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
+  _$_HomeState({this.list, this.loading, this.error});
 
   @override
-  final NetworkResource<List<String>>? resource;
+  final ListViewData? list;
+  @override
+  final InfoViewData? loading;
+  @override
+  final InfoViewData? error;
 
   @override
-  String toString() {
-    return 'HomeState(resource: $resource)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeState(list: $list, loading: $loading, error: $error)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeState'))
+      ..add(DiagnosticsProperty('list', list))
+      ..add(DiagnosticsProperty('loading', loading))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _HomeState &&
-            (identical(other.resource, resource) ||
+            (identical(other.list, list) ||
+                const DeepCollectionEquality().equals(other.list, list)) &&
+            (identical(other.loading, loading) ||
                 const DeepCollectionEquality()
-                    .equals(other.resource, resource)));
+                    .equals(other.loading, loading)) &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(resource);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(list) ^
+      const DeepCollectionEquality().hash(loading) ^
+      const DeepCollectionEquality().hash(error);
 
   @JsonKey(ignore: true)
   @override
@@ -144,11 +172,17 @@ class _$_HomeState implements _HomeState {
 }
 
 abstract class _HomeState implements HomeState {
-  factory _HomeState({NetworkResource<List<String>>? resource}) = _$_HomeState;
+  factory _HomeState(
+      {ListViewData? list,
+      InfoViewData? loading,
+      InfoViewData? error}) = _$_HomeState;
 
   @override
-  NetworkResource<List<String>>? get resource =>
-      throw _privateConstructorUsedError;
+  ListViewData? get list => throw _privateConstructorUsedError;
+  @override
+  InfoViewData? get loading => throw _privateConstructorUsedError;
+  @override
+  InfoViewData? get error => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$HomeStateCopyWith<_HomeState> get copyWith =>
