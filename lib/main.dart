@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterdex/common/di/injection.dart';
-import 'file:///C:/Users/tamar/Documents/Programming/Android/isekai_grinder/lib/home/presentation/HomePage.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutterdex/home/presentation/HomePage.dart';
+
+import 'home/presentation/HomePage.dart';
 
 void main() async {
   configureDependencies(Environment.dev);
