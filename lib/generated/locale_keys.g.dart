@@ -6,5 +6,6 @@ abstract class  LocaleKeys {
   static const msg_mixed = 'msg_mixed';
   static const gender = 'gender';
   static const error = 'error';
+  static const title = 'title';
 
 }

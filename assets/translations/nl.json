@@ -7,6 +7,6 @@
     "female":"Hello girl :) {}",
     "other":"Hello {}"
   },
-  "error": "An error occured",
-  "title": "FlutterDex EN"
+  "error": "Er is iets fout gegaan",
+  "title": "FlutterDex NL"
 }

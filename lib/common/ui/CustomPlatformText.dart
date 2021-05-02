@@ -1,10 +1,12 @@
 import 'dart:ui' as ui show TextHeightBehavior;
 
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/widgets.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 String formatData(
     String data, bool? capitalizeFirst, bool? upperCase, bool? lowerCase) {
+  data = data.tr(); //TODO check if this works properly
+
   if (capitalizeFirst == true) {
     data = data.substring(0, 1).toUpperCase() + data.substring(1, data.length);
   }

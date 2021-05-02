@@ -14,7 +14,7 @@ class CodegenLoader extends AssetLoader{
     return Future.value(mapLocales[locale.toString()]);
   }
 
-  static const Map<String,dynamic> en = {
+  static const Map<String,dynamic> nl = {
   "msg": "{} are written in the {} language",
   "msg_named": "Easy localization are written in the {lang} language",
   "msg_mixed": "{} are written in the {lang} language",
@@ -22,7 +22,21 @@ class CodegenLoader extends AssetLoader{
     "male": "Hi man ;) {}",
     "female": "Hello girl :) {}",
     "other": "Hello {}"
-  }
+  },
+  "error": "Er is iets fout gegaan",
+  "title": "FlutterDex NL"
 };
-static const Map<String, Map<String,dynamic>> mapLocales = {"en": en};
+static const Map<String,dynamic> en = {
+  "msg": "{} are written in the {} language",
+  "msg_named": "Easy localization are written in the {lang} language",
+  "msg_mixed": "{} are written in the {lang} language",
+  "gender": {
+    "male": "Hi man ;) {}",
+    "female": "Hello girl :) {}",
+    "other": "Hello {}"
+  },
+  "error": "An error occured",
+  "title": "FlutterDex EN"
+};
+static const Map<String, Map<String,dynamic>> mapLocales = {"nl": nl, "en": en};
 }

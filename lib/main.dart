@@ -2,10 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutterdex/common/di/injection.dart';
+import 'package:flutterdex/common/routing/AppRouter.gr.dart';
 import 'package:injectable/injectable.dart';
-import 'package:flutterdex/home/presentation/HomePage.dart';
-
-import 'home/presentation/HomePage.dart';
 
 void main() async {
   configureDependencies(Environment.dev);
@@ -24,10 +22,13 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return PlatformApp(
+    final _router = AppRouter();
+
+    return PlatformApp.router(
+        routerDelegate: _router.delegate(),
+        routeInformationParser: _router.defaultRouteParser(),
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        home: HomePage());
+        locale: context.locale);
   }
 }
