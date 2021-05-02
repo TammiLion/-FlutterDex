@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
 
     return GestureDetector(
         onTap: () {
-          _bloc.add(HomeEvent(pos));
+          //_bloc.add(HomeEvent(pos));
           AutoRouter.of(context).push(DetailRoute(id: name));
         },
         child: Container(
