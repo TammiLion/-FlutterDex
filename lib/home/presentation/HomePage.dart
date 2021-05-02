@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutterdex/common/ui/CustomPlatformText.dart';
 import 'package:flutterdex/common/di/injection.dart';
 import 'package:flutterdex/home/blocs/HomeBloc.dart';
 import 'package:flutterdex/home/blocs/HomeEvent.dart';
 import 'package:flutterdex/home/presentation/HomeState.dart';
+import 'package:logger/logger.dart';
 
 class HomePage extends StatefulWidget {
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -12,6 +16,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _bloc = getIt<HomeBloc>();
   HomeState _homeState = HomeState();
+  Logger log = Logger();
+
 
   @override
   void initState() {
@@ -26,9 +32,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("FlutterDex"),
+    return PlatformScaffold(
+      appBar: PlatformAppBar(
+        title: PlatformText("FlutterDex"),
       ),
       body: _body(),
     );
@@ -59,13 +65,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildRow(String name, int pos) {
-    return InkWell(
+    log.v('name is $name');
+
+    return GestureDetector(
         key: UniqueKey(),
-        child: ListTile(
-          title: Text(name),
-          onTap: () {
-            _bloc.add(HomeEvent(pos));
-          },
-        ));
+        onTap: () {
+          _bloc.add(HomeEvent(pos));
+        },
+        child: Container(
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: CustomPlatformText(
+              name,
+              capitalizeFirst: true,
+              style: platformThemeData(context,
+                  material: (data) => data.textTheme.subtitle1?.copyWith(),
+                  cupertino: (data) => data.textTheme.navLargeTitleTextStyle),
+            )));
   }
 }
