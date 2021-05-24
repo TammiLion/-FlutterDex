@@ -6,6 +6,10 @@ import 'package:flutterdex/home/presentation/HomeState.dart';
 class HomeModel {
   PokemonPage _page = PokemonPage();
 
+  void restoreState(int offset) {
+    _page = _page.copyWith(next: offset);
+  }
+
   bool canLoadPrevious() {
     return _page.previous != null;
   }
@@ -35,34 +39,24 @@ class HomeModel {
   }
 
   Stream<HomeState> handleLoading() async* {
-    ListViewData? list = _hasListItems() ? ListViewData(_page.results) : null;
-    yield HomeState(list: list, loading: InfoViewData(null), error: null);
+    yield mapToHomeState().copyWith(loading: InfoViewData(null));
   }
 
   Stream<HomeState> handleError(String? message) async* {
-    ListViewData? list = _hasListItems() ? ListViewData(_page.results) : null;
-    yield HomeState(list: list, loading: null, error: InfoViewData(null));
+    yield mapToHomeState().copyWith(error: InfoViewData(null));
   }
 
   HomeState onClicked(int position) {
-    print("clicked");
-    return mapToHomeState();
+    return mapToHomeState()
+        .copyWith(detailPage: DetailPageData(_page.results[position]));
   }
 
   HomeState mapToHomeState() {
-    return HomeState(list: ListViewData([]), loading: null, error: null);
+    ListViewData? list = _hasListItems() ? ListViewData(_page.results) : null;
+    return HomeState(list: list, loading: null, error: null);
   }
 
   bool _hasListItems() {
     return _page.results.isNotEmpty;
-  }
-
-  HomeState mapToLoadingState() {
-    if (_hasListItems()) {
-      return mapToHomeState().copyWith(loading: new InfoViewData(null));
-    } else {
-      return HomeState(
-          list: null, loading: new InfoViewData(null), error: null);
-    }
   }
 }

@@ -11,9 +11,9 @@ class PokemonPage with _$PokemonPage {
   const PokemonPage._();
 
   factory PokemonPage(
-      {@Default(1) int? count,
+      {@Default(null) int? count,
       @Default(0) int? next,
-      @Default(0) int? previous,
+        @Default(0) int? previous,
       @Default([]) List<String> results}) = _PokemonPage;
 
   //Returns a new PokemonPage object with the given results inserted after
@@ -34,7 +34,7 @@ class PokemonPage with _$PokemonPage {
 
   int? calculateNextValue() {
     final current = next;
-    if (current == null || current >= (count ?? 0)) {
+    if (current == null || (count != null && current >= count!)) {
       return null;
     } else {
       return current + defaultLimit;

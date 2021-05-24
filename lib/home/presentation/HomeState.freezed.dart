@@ -17,9 +17,13 @@ class _$HomeStateTearOff {
   const _$HomeStateTearOff();
 
   _HomeState call(
-      {ListViewData? list, InfoViewData? loading, InfoViewData? error}) {
+      {ListViewData? list,
+      DetailPageData? detailPage,
+      InfoViewData? loading,
+      InfoViewData? error}) {
     return _HomeState(
       list: list,
+      detailPage: detailPage,
       loading: loading,
       error: error,
     );
@@ -32,6 +36,7 @@ const $HomeState = _$HomeStateTearOff();
 /// @nodoc
 mixin _$HomeState {
   ListViewData? get list => throw _privateConstructorUsedError;
+  DetailPageData? get detailPage => throw _privateConstructorUsedError;
   InfoViewData? get loading => throw _privateConstructorUsedError;
   InfoViewData? get error => throw _privateConstructorUsedError;
 
@@ -44,7 +49,11 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
-  $Res call({ListViewData? list, InfoViewData? loading, InfoViewData? error});
+  $Res call(
+      {ListViewData? list,
+      DetailPageData? detailPage,
+      InfoViewData? loading,
+      InfoViewData? error});
 }
 
 /// @nodoc
@@ -58,6 +67,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   @override
   $Res call({
     Object? list = freezed,
+    Object? detailPage = freezed,
     Object? loading = freezed,
     Object? error = freezed,
   }) {
@@ -66,6 +76,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
               as ListViewData?,
+      detailPage: detailPage == freezed
+          ? _value.detailPage
+          : detailPage // ignore: cast_nullable_to_non_nullable
+              as DetailPageData?,
       loading: loading == freezed
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -84,7 +98,11 @@ abstract class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
           _HomeState value, $Res Function(_HomeState) then) =
       __$HomeStateCopyWithImpl<$Res>;
   @override
-  $Res call({ListViewData? list, InfoViewData? loading, InfoViewData? error});
+  $Res call(
+      {ListViewData? list,
+      DetailPageData? detailPage,
+      InfoViewData? loading,
+      InfoViewData? error});
 }
 
 /// @nodoc
@@ -99,6 +117,7 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? list = freezed,
+    Object? detailPage = freezed,
     Object? loading = freezed,
     Object? error = freezed,
   }) {
@@ -107,6 +126,10 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.list
           : list // ignore: cast_nullable_to_non_nullable
               as ListViewData?,
+      detailPage: detailPage == freezed
+          ? _value.detailPage
+          : detailPage // ignore: cast_nullable_to_non_nullable
+              as DetailPageData?,
       loading: loading == freezed
           ? _value.loading
           : loading // ignore: cast_nullable_to_non_nullable
@@ -121,10 +144,12 @@ class __$HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
-  _$_HomeState({this.list, this.loading, this.error});
+  _$_HomeState({this.list, this.detailPage, this.loading, this.error});
 
   @override
   final ListViewData? list;
+  @override
+  final DetailPageData? detailPage;
   @override
   final InfoViewData? loading;
   @override
@@ -132,7 +157,7 @@ class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeState(list: $list, loading: $loading, error: $error)';
+    return 'HomeState(list: $list, detailPage: $detailPage, loading: $loading, error: $error)';
   }
 
   @override
@@ -141,6 +166,7 @@ class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
     properties
       ..add(DiagnosticsProperty('type', 'HomeState'))
       ..add(DiagnosticsProperty('list', list))
+      ..add(DiagnosticsProperty('detailPage', detailPage))
       ..add(DiagnosticsProperty('loading', loading))
       ..add(DiagnosticsProperty('error', error));
   }
@@ -151,6 +177,9 @@ class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
         (other is _HomeState &&
             (identical(other.list, list) ||
                 const DeepCollectionEquality().equals(other.list, list)) &&
+            (identical(other.detailPage, detailPage) ||
+                const DeepCollectionEquality()
+                    .equals(other.detailPage, detailPage)) &&
             (identical(other.loading, loading) ||
                 const DeepCollectionEquality()
                     .equals(other.loading, loading)) &&
@@ -162,6 +191,7 @@ class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(list) ^
+      const DeepCollectionEquality().hash(detailPage) ^
       const DeepCollectionEquality().hash(loading) ^
       const DeepCollectionEquality().hash(error);
 
@@ -174,11 +204,14 @@ class _$_HomeState with DiagnosticableTreeMixin implements _HomeState {
 abstract class _HomeState implements HomeState {
   factory _HomeState(
       {ListViewData? list,
+      DetailPageData? detailPage,
       InfoViewData? loading,
       InfoViewData? error}) = _$_HomeState;
 
   @override
   ListViewData? get list => throw _privateConstructorUsedError;
+  @override
+  DetailPageData? get detailPage => throw _privateConstructorUsedError;
   @override
   InfoViewData? get loading => throw _privateConstructorUsedError;
   @override

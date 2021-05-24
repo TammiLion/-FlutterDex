@@ -15,14 +15,17 @@ class PokemonPageRepository {
       @Named("network") this._networkDataSource, @Named("local") this._cache);
 
   Stream<NetworkResource<PokeApiPage>> getPage(int offset) async* {
-    PokeApiPage? page = await _cache.getPage(offset);
-    if (page == null) {
-      yield NetworkResource.loading();
-      page = await _networkDataSource.getPage(offset);
-      if (page != null) {
-        yield NetworkResource(page.copyWith(offset: offset));
+    try {
+      PokeApiPage? page = await _cache.getPage(offset);
+      if (page == null) {
+        yield NetworkResource.loading();
+        page = await _networkDataSource.getPage(offset);
+        if (page != null) {
+          yield NetworkResource(page.copyWith(offset: offset));
+        }
       }
+    } on Exception catch (e) {
+      yield NetworkResource.error(LocaleKeys.error);
     }
-    yield NetworkResource.error(LocaleKeys.error);
   }
 }

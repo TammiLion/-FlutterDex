@@ -1,49 +1,83 @@
+
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutterdex/common/di/injection.dart';
 import 'package:flutterdex/common/routing/AppRouter.gr.dart';
 import 'package:flutterdex/common/ui/CustomPlatformText.dart';
 import 'package:flutterdex/generated/locale_keys.g.dart';
 import 'package:flutterdex/home/blocs/HomeBloc.dart';
 import 'package:flutterdex/home/blocs/HomeEvent.dart';
 import 'package:flutterdex/home/presentation/HomeState.dart';
-import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final _bloc = getIt<HomeBloc>();
-  HomeState _homeState = HomeState();
-  Logger log = Logger();
+class _HomePageState extends State<HomePage> with RestorationMixin {
+  final RestorableInt _scrollPosition = RestorableInt(20);
+  final ScrollController _scrollController = ScrollController();
 
   @override
-  void initState() {
-    super.initState();
-    _bloc.stream.listen((state) {
-      setState(() {
-        _homeState = state;
-      });
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _restoreState();
+    _setupScrollListener();
+  }
+
+  void _restoreState() {
+    if (_scrollPosition.value == 0) {
+      context.read<HomeBloc>().add(HomeEvent.endOfPage());
+    } else {
+      context
+          .read<HomeBloc>()
+          .add(HomeEvent.restoreState(_scrollPosition.value));
+    }
+  }
+
+  void _setupScrollListener() {
+    _scrollController.addListener(() {
+      if (_scrollController.position.atEdge) {
+        _scrollPosition.value++;
+        if (_scrollController.position.pixels == 0) {
+          context.read<HomeBloc>().add(HomeEvent.startOfPage());
+        } else {
+          context.read<HomeBloc>().add(HomeEvent.endOfPage());
+        }
+      }
     });
-    _bloc.add(HomeEvent.endOfPage()); //trigger initial load
+  }
+
+  @override
+  void dispose() {
+    _scrollPosition.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: CustomPlatformText(LocaleKeys.title.tr()),
-      ),
-      body: _body(),
-    );
+        appBar: PlatformAppBar(
+          title: CustomPlatformText(LocaleKeys.title.tr()),
+        ),
+        body: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return _body(state);
+          },
+        ));
   }
 
-  Widget _body() {
-    final list = _homeState.list?.names;
+  Widget _body(HomeState state) {
+    final list = state.list?.names;
+
+    if (state.detailPage != null) {
+      AutoRouter.of(context).push(DetailRoute(id: state.detailPage!.pokemon));
+    }
 
     if (list == null) {
       return Container();
@@ -54,25 +88,17 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildList(List<String> names) {
     return ListView.builder(
+        controller: _scrollController,
         itemCount: names.length,
         itemBuilder: (BuildContext _context, int i) {
-          /*if (i <= 0) {
-            _bloc.add(HomeEvent.startOfPage());
-          }*/
-          if (i >= names.length - 1) {
-            _bloc.add(HomeEvent.endOfPage());
-          }
           return _buildRow(names[i], i);
         });
   }
 
   Widget _buildRow(String name, int pos) {
-    log.v('name is $name');
-
     return GestureDetector(
         onTap: () {
-          //_bloc.add(HomeEvent(pos));
-          AutoRouter.of(context).push(DetailRoute(id: name));
+          context.read<HomeBloc>().add(HomeEvent(pos));
         },
         child: Container(
             key: UniqueKey(),
@@ -100,5 +126,13 @@ class _HomePageState extends State<HomePage> {
   Color getListItemColor(int pos) {
     final pickedColor = pos % containerColors.length;
     return containerColors[pickedColor];
+  }
+
+  @override
+  String? get restorationId => 'home_page';
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    registerForRestoration(_scrollPosition, 'scroll_position');
   }
 }

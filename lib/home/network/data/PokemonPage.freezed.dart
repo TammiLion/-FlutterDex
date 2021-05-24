@@ -17,7 +17,7 @@ class _$PokemonPageTearOff {
   const _$PokemonPageTearOff();
 
   _PokemonPage call(
-      {int? count = 1,
+      {int? count = null,
       int? next = 0,
       int? previous = 0,
       List<String> results = const []}) {
@@ -140,13 +140,13 @@ class __$PokemonPageCopyWithImpl<$Res> extends _$PokemonPageCopyWithImpl<$Res>
 /// @nodoc
 class _$_PokemonPage extends _PokemonPage with DiagnosticableTreeMixin {
   _$_PokemonPage(
-      {this.count = 1,
+      {this.count = null,
       this.next = 0,
       this.previous = 0,
       this.results = const []})
       : super._();
 
-  @JsonKey(defaultValue: 1)
+  @JsonKey(defaultValue: null)
   @override
   final int? count;
   @JsonKey(defaultValue: 0)

@@ -13,24 +13,24 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(this._repo) : super(HomeState());
 
   @override
-  void onTransition(Transition<HomeEvent, HomeState> transition) {
-    super.onTransition(transition);
-    print("transition: $HomeEvent - $HomeState");
-  }
-
-  @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (state.loading != null)
       yield state; //feels like cheating but it works really well to not trigger extra network requests :p
 
     yield* event.when((position) async* {
-      print("pos: $position");
-      yield state; //TODO: make Nav HomeState
+      yield _model.onClicked(position);
     }, startOfPage: () async* {
       yield* handleStartOfPage();
     }, endOfPage: () async* {
       yield* handleEndOfPage();
+    }, restoreState: (int position) async* {
+      _model.restoreState(position);
+      yield* handlePage(position);
     });
+  }
+
+  Stream<HomeState> handlePage(int position) async* {
+    yield* getResponseFromRepo(position);
   }
 
   Stream<HomeState> handleStartOfPage() async* {
@@ -46,7 +46,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> getResponseFromRepo(int offset) async* {
-    final stream = _repo.getPage(_model.getNextOffset());
+    final stream = _repo.getPage(offset);
     await for (var value in stream) {
       yield* _model.onResponse(value);
     }

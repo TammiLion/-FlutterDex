@@ -22,6 +22,12 @@ class _$HomeEventTearOff {
     );
   }
 
+  RestoreState restoreState(int position) {
+    return RestoreState(
+      position,
+    );
+  }
+
   StartOfPage startOfPage() {
     return const StartOfPage();
   }
@@ -39,6 +45,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(int position) $default, {
+    required TResult Function(int position) restoreState,
     required TResult Function() startOfPage,
     required TResult Function() endOfPage,
   }) =>
@@ -46,6 +53,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(int position)? $default, {
+    TResult Function(int position)? restoreState,
     TResult Function()? startOfPage,
     TResult Function()? endOfPage,
     required TResult orElse(),
@@ -54,6 +62,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(PokemonClicked value) $default, {
+    required TResult Function(RestoreState value) restoreState,
     required TResult Function(StartOfPage value) startOfPage,
     required TResult Function(EndOfPage value) endOfPage,
   }) =>
@@ -61,6 +70,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(PokemonClicked value)? $default, {
+    TResult Function(RestoreState value)? restoreState,
     TResult Function(StartOfPage value)? startOfPage,
     TResult Function(EndOfPage value)? endOfPage,
     required TResult orElse(),
@@ -156,6 +166,7 @@ class _$PokemonClicked with DiagnosticableTreeMixin implements PokemonClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(int position) $default, {
+    required TResult Function(int position) restoreState,
     required TResult Function() startOfPage,
     required TResult Function() endOfPage,
   }) {
@@ -166,6 +177,7 @@ class _$PokemonClicked with DiagnosticableTreeMixin implements PokemonClicked {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(int position)? $default, {
+    TResult Function(int position)? restoreState,
     TResult Function()? startOfPage,
     TResult Function()? endOfPage,
     required TResult orElse(),
@@ -180,6 +192,7 @@ class _$PokemonClicked with DiagnosticableTreeMixin implements PokemonClicked {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(PokemonClicked value) $default, {
+    required TResult Function(RestoreState value) restoreState,
     required TResult Function(StartOfPage value) startOfPage,
     required TResult Function(EndOfPage value) endOfPage,
   }) {
@@ -190,6 +203,7 @@ class _$PokemonClicked with DiagnosticableTreeMixin implements PokemonClicked {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(PokemonClicked value)? $default, {
+    TResult Function(RestoreState value)? restoreState,
     TResult Function(StartOfPage value)? startOfPage,
     TResult Function(EndOfPage value)? endOfPage,
     required TResult orElse(),
@@ -207,6 +221,137 @@ abstract class PokemonClicked implements HomeEvent {
   int get position => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $PokemonClickedCopyWith<PokemonClicked> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RestoreStateCopyWith<$Res> {
+  factory $RestoreStateCopyWith(
+          RestoreState value, $Res Function(RestoreState) then) =
+      _$RestoreStateCopyWithImpl<$Res>;
+  $Res call({int position});
+}
+
+/// @nodoc
+class _$RestoreStateCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res>
+    implements $RestoreStateCopyWith<$Res> {
+  _$RestoreStateCopyWithImpl(
+      RestoreState _value, $Res Function(RestoreState) _then)
+      : super(_value, (v) => _then(v as RestoreState));
+
+  @override
+  RestoreState get _value => super._value as RestoreState;
+
+  @override
+  $Res call({
+    Object? position = freezed,
+  }) {
+    return _then(RestoreState(
+      position == freezed
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+class _$RestoreState with DiagnosticableTreeMixin implements RestoreState {
+  const _$RestoreState(this.position);
+
+  @override
+  final int position;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeEvent.restoreState(position: $position)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeEvent.restoreState'))
+      ..add(DiagnosticsProperty('position', position));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is RestoreState &&
+            (identical(other.position, position) ||
+                const DeepCollectionEquality()
+                    .equals(other.position, position)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(position);
+
+  @JsonKey(ignore: true)
+  @override
+  $RestoreStateCopyWith<RestoreState> get copyWith =>
+      _$RestoreStateCopyWithImpl<RestoreState>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(int position) $default, {
+    required TResult Function(int position) restoreState,
+    required TResult Function() startOfPage,
+    required TResult Function() endOfPage,
+  }) {
+    return restoreState(position);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(int position)? $default, {
+    TResult Function(int position)? restoreState,
+    TResult Function()? startOfPage,
+    TResult Function()? endOfPage,
+    required TResult orElse(),
+  }) {
+    if (restoreState != null) {
+      return restoreState(position);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(PokemonClicked value) $default, {
+    required TResult Function(RestoreState value) restoreState,
+    required TResult Function(StartOfPage value) startOfPage,
+    required TResult Function(EndOfPage value) endOfPage,
+  }) {
+    return restoreState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(PokemonClicked value)? $default, {
+    TResult Function(RestoreState value)? restoreState,
+    TResult Function(StartOfPage value)? startOfPage,
+    TResult Function(EndOfPage value)? endOfPage,
+    required TResult orElse(),
+  }) {
+    if (restoreState != null) {
+      return restoreState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RestoreState implements HomeEvent {
+  const factory RestoreState(int position) = _$RestoreState;
+
+  int get position => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RestoreStateCopyWith<RestoreState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -255,6 +400,7 @@ class _$StartOfPage with DiagnosticableTreeMixin implements StartOfPage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(int position) $default, {
+    required TResult Function(int position) restoreState,
     required TResult Function() startOfPage,
     required TResult Function() endOfPage,
   }) {
@@ -265,6 +411,7 @@ class _$StartOfPage with DiagnosticableTreeMixin implements StartOfPage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(int position)? $default, {
+    TResult Function(int position)? restoreState,
     TResult Function()? startOfPage,
     TResult Function()? endOfPage,
     required TResult orElse(),
@@ -279,6 +426,7 @@ class _$StartOfPage with DiagnosticableTreeMixin implements StartOfPage {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(PokemonClicked value) $default, {
+    required TResult Function(RestoreState value) restoreState,
     required TResult Function(StartOfPage value) startOfPage,
     required TResult Function(EndOfPage value) endOfPage,
   }) {
@@ -289,6 +437,7 @@ class _$StartOfPage with DiagnosticableTreeMixin implements StartOfPage {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(PokemonClicked value)? $default, {
+    TResult Function(RestoreState value)? restoreState,
     TResult Function(StartOfPage value)? startOfPage,
     TResult Function(EndOfPage value)? endOfPage,
     required TResult orElse(),
@@ -347,6 +496,7 @@ class _$EndOfPage with DiagnosticableTreeMixin implements EndOfPage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(int position) $default, {
+    required TResult Function(int position) restoreState,
     required TResult Function() startOfPage,
     required TResult Function() endOfPage,
   }) {
@@ -357,6 +507,7 @@ class _$EndOfPage with DiagnosticableTreeMixin implements EndOfPage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(int position)? $default, {
+    TResult Function(int position)? restoreState,
     TResult Function()? startOfPage,
     TResult Function()? endOfPage,
     required TResult orElse(),
@@ -371,6 +522,7 @@ class _$EndOfPage with DiagnosticableTreeMixin implements EndOfPage {
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(PokemonClicked value) $default, {
+    required TResult Function(RestoreState value) restoreState,
     required TResult Function(StartOfPage value) startOfPage,
     required TResult Function(EndOfPage value) endOfPage,
   }) {
@@ -381,6 +533,7 @@ class _$EndOfPage with DiagnosticableTreeMixin implements EndOfPage {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(PokemonClicked value)? $default, {
+    TResult Function(RestoreState value)? restoreState,
     TResult Function(StartOfPage value)? startOfPage,
     TResult Function(EndOfPage value)? endOfPage,
     required TResult orElse(),

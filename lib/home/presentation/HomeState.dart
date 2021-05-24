@@ -1,6 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:injectable/injectable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'HomeState.freezed.dart';
 
@@ -8,7 +7,8 @@ part 'HomeState.freezed.dart';
 class HomeState with _$HomeState {
   factory HomeState(
       {ListViewData? list,
-      InfoViewData? loading,
+      DetailPageData? detailPage,
+        InfoViewData? loading,
       InfoViewData? error}) = _HomeState;
 }
 
@@ -22,4 +22,10 @@ class InfoViewData {
   String? message;
 
   InfoViewData(this.message);
+}
+
+class DetailPageData {
+  String pokemon;
+
+  DetailPageData(this.pokemon);
 }

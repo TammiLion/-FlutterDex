@@ -14,7 +14,7 @@ class AppRouter extends _i1.RootStackRouter {
   @override
   final Map<String, _i1.PageFactory> pagesMap = {
     HomeRoute.name: (entry) {
-      return _i1.AdaptivePage(entry: entry, child: _i2.HomePage());
+      return _i1.AdaptivePage(entry: entry, child: const _i2.HomePage());
     },
     DetailRoute.name: (entry) {
       var args = entry.routeData
