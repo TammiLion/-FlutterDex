@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutterdex/common/routing/AppRouter.gr.dart';
 import 'package:flutterdex/common/ui/CustomPlatformText.dart';
+import 'package:flutterdex/common/util/extensions.dart';
 import 'package:flutterdex/generated/locale_keys.g.dart';
 import 'package:flutterdex/home/blocs/HomeBloc.dart';
 import 'package:flutterdex/home/blocs/HomeEvent.dart';
@@ -73,16 +73,16 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
   }
 
   Widget _body(HomeState state) {
-    final list = state.list?.names;
+    final names = state.list?.names;
 
-    if (state.detailPage != null) {
-      AutoRouter.of(context).push(DetailRoute(id: state.detailPage!.pokemon));
-    }
+    state.detailPage?.let((it) {
+      AutoRouter.of(context).push(DetailRoute(id: it.pokemon));
+    });
 
-    if (list == null) {
+    if (names == null) {
       return Container();
     } else {
-      return _buildList(list);
+      return _buildList(names);
     }
   }
 
