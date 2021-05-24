@@ -79,11 +79,7 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
       AutoRouter.of(context).push(DetailRoute(id: it.pokemon));
     });
 
-    if (names == null) {
-      return Container();
-    } else {
-      return _buildList(names);
-    }
+    return names == null ? Container() : _buildList(names);
   }
 
   Widget _buildList(List<String> names) {
