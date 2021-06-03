@@ -15,9 +15,9 @@ class DetailPage extends StatelessWidget {
     return PlatformScaffold(
         backgroundColor: offblack,
         appBar: PlatformAppBar(
-          backgroundColor: gold,
+          backgroundColor: lightGrey,
           title: CustomPlatformText(id ?? "missingno",
-              style: TextStyle(color: white)),
+              style: TextStyle(color: gold)),
         ),
         body: new SafeArea(child: _testBody()));
   }
@@ -92,9 +92,10 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Widget _chart(Color backgroundColor, {Color? barColor, Color? barBackgroundColor}) {
+  Widget _chart(Color backgroundColor,
+      {Color? barColor, Color? barBackgroundColor}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(28.0, 20.0, 28.0, 18.0),
       child: BarChart(BarChartData(
           barGroups: _bars(barColor, barBackgroundColor),
           backgroundColor: backgroundColor,
@@ -103,7 +104,9 @@ class DetailPage extends StatelessWidget {
               leftTitles: SideTitles(showTitles: false),
               bottomTitles: SideTitles(
                 showTitles: true,
-                getTextStyles: (value) => TextStyle(color: offwhite, fontWeight: FontWeight.bold, fontSize: 14),
+                margin: 10,
+                getTextStyles: (value) => TextStyle(
+                    color: offwhite, fontWeight: FontWeight.bold, fontSize: 14),
                 getTitles: (double value) {
                   switch (value.toInt()) {
                     case 0:
@@ -137,13 +140,14 @@ class DetailPage extends StatelessWidget {
     ];
   }
 
-  BarChartGroupData _bar(int x, double y, [Color? barColor, Color? barBackgroundColor]) {
+  BarChartGroupData _bar(int x, double y,
+      [Color? barColor, Color? barBackgroundColor]) {
     return BarChartGroupData(x: x, barRods: [
       BarChartRodData(
           colors: [barColor ?? gold],
           y: y,
-          backDrawRodData:
-              BackgroundBarChartRodData(show: true, y: 5, colors: [barBackgroundColor ?? grey]))
+          backDrawRodData: BackgroundBarChartRodData(
+              show: true, y: 5, colors: [barBackgroundColor ?? grey]))
     ]);
   }
 
@@ -153,7 +157,8 @@ class DetailPage extends StatelessWidget {
         height: 200,
         child: Card(
             color: color,
-            child: _chart(color, barColor: barColor, barBackgroundColor: barBackgroundColor),
+            child: _chart(color,
+                barColor: barColor, barBackgroundColor: barBackgroundColor),
             shape: ContinuousRectangleBorder(
                 borderRadius: BorderRadius.circular(16))));
   }
