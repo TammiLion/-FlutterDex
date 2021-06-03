@@ -25,43 +25,137 @@ class DetailPage extends StatelessWidget {
   Widget _testBody() {
     return Column(
       children: [
-        _card(black),
+        _card(black, barBackgroundColor: mutedGold),
         Row(
           children: [
             Column(
               children: [
-                Text("OffWhite", style: TextStyle(color: offwhite, fontWeight: FontWeight.bold, fontSize: 20)),
-                Text("Gold", style: TextStyle(color: gold, fontWeight: FontWeight.bold, fontSize: 20)),
-                Text("MutedGold", style: TextStyle(color: mutedGold, fontWeight: FontWeight.bold, fontSize: 20)),
+                Text("OffWhite",
+                    style: TextStyle(
+                        color: offwhite,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20)),
+                Text("Gold",
+                    style: TextStyle(
+                        color: gold,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20)),
+                Text("MutedGold",
+                    style: TextStyle(
+                        color: mutedGold,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20)),
               ],
             ),
             Column(
               children: [
-                Text("OffWhite", style: TextStyle(color: offwhite, fontWeight: FontWeight.normal, fontSize: 20)),
-                Text("Gold", style: TextStyle(color: gold, fontWeight: FontWeight.normal, fontSize: 20)),
-                Text("MutedGold", style: TextStyle(color: mutedGold, fontWeight: FontWeight.normal, fontSize: 20)),
+                Text("OffWhite",
+                    style: TextStyle(
+                        color: offwhite,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 20)),
+                Text("Gold",
+                    style: TextStyle(
+                        color: gold,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 20)),
+                Text("MutedGold",
+                    style: TextStyle(
+                        color: mutedGold,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 20)),
               ],
             ),
             Column(
               children: [
-                Text("White", style: TextStyle(color: white, fontWeight: FontWeight.bold, fontSize: 20))
+                Text("White",
+                    style: TextStyle(
+                        color: white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20))
               ],
             ),
             Column(
               children: [
-                Text("White", style: TextStyle(color: white, fontWeight: FontWeight.normal, fontSize: 20))
+                Text("White",
+                    style: TextStyle(
+                        color: white,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 20))
               ],
             ),
           ],
         ),
-        _card(lightGrey),
-        _card(darkGrey)
+        _card(lightGrey, barBackgroundColor: grey),
+        _card(darkGrey, barBackgroundColor: lightGrey)
       ],
     );
   }
 
-  Widget _card(Color color) {
-    return Card(color: color, child: _circle(color), shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(16)));
+  Widget _chart(Color backgroundColor, {Color? barColor, Color? barBackgroundColor}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: BarChart(BarChartData(
+          barGroups: _bars(barColor, barBackgroundColor),
+          backgroundColor: backgroundColor,
+          borderData: FlBorderData(show: false),
+          titlesData: FlTitlesData(
+              leftTitles: SideTitles(showTitles: false),
+              bottomTitles: SideTitles(
+                showTitles: true,
+                getTextStyles: (value) => TextStyle(color: offwhite, fontWeight: FontWeight.bold, fontSize: 14),
+                getTitles: (double value) {
+                  switch (value.toInt()) {
+                    case 0:
+                      return 'M';
+                    case 1:
+                      return 'T';
+                    case 2:
+                      return 'W';
+                    case 3:
+                      return 'T';
+                    case 4:
+                      return 'F';
+                    case 5:
+                      return 'S';
+                    case 6:
+                      return 'S';
+                    default:
+                      return '';
+                  }
+                },
+              )))),
+    );
+  }
+
+  List<BarChartGroupData> _bars([Color? barColor, Color? barBackgroundColor]) {
+    return [
+      _bar(0, 1, barColor, barBackgroundColor),
+      _bar(1, 2, barColor, barBackgroundColor),
+      _bar(2, 6, barColor, barBackgroundColor),
+      _bar(3, 4, barColor, barBackgroundColor),
+    ];
+  }
+
+  BarChartGroupData _bar(int x, double y, [Color? barColor, Color? barBackgroundColor]) {
+    return BarChartGroupData(x: x, barRods: [
+      BarChartRodData(
+          colors: [barColor ?? gold],
+          y: y,
+          backDrawRodData:
+              BackgroundBarChartRodData(show: true, y: 5, colors: [barBackgroundColor ?? grey]))
+    ]);
+  }
+
+  Widget _card(Color color, {Color? barColor, Color? barBackgroundColor}) {
+    return SizedBox(
+        width: 200,
+        height: 200,
+        child: Card(
+            color: color,
+            child: _chart(color, barColor: barColor, barBackgroundColor: barBackgroundColor),
+            shape: ContinuousRectangleBorder(
+                borderRadius: BorderRadius.circular(16))));
   }
 
   Widget _circle(Color color) {
