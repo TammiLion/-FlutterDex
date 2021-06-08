@@ -23,11 +23,11 @@ void main() async {
         supportedLocales: [Locale('en'), Locale('nl')],
         path: 'assets/translations',
         fallbackLocale: Locale('en'),
-        child: MyApp()),
+        child: FlutterDexApp()),
   ));
 }
 
-class MyApp extends StatelessWidget {
+class FlutterDexApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget modularApp = Platform.isAndroid
