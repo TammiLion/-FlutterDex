@@ -1,9 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutterdex/common/routing/AppRouter.gr.dart';
 import 'package:flutterdex/common/ui/CustomPlatformText.dart';
 import 'package:flutterdex/common/util/extensions.dart';
 import 'package:flutterdex/generated/locale_keys.g.dart';
@@ -11,6 +9,7 @@ import 'package:flutterdex/home/blocs/HomeBloc.dart';
 import 'package:flutterdex/home/blocs/HomeEvent.dart';
 import 'package:flutterdex/home/presentation/HomeState.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -76,7 +75,7 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
     final names = state.list?.names;
 
     state.detailPage?.let((it) {
-      AutoRouter.of(context).push(DetailRoute(id: it.pokemon));
+      Modular.to.pushNamed('/pokemon/${it.pokemon}');
     });
 
     return names == null ? Container() : _buildList(names);
