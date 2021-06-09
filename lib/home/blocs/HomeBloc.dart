@@ -11,20 +11,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final HomeModel _model = HomeModel();
 
   HomeBloc(this._repo) : super(HomeState());
+  var retry;
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    if (state.loading != null)
-      yield state; //feels like cheating but it works really well to not trigger extra network requests :p
+    if (retry != null) yield state;
 
     yield* event.when((position) async* {
       yield _model.onClicked(position);
     }, startOfPage: () async* {
+      retry = handleStartOfPage();
       yield* handleStartOfPage();
     }, endOfPage: () async* {
+      retry = handleEndOfPage();
       yield* handleEndOfPage();
     }, restoreState: (int position) async* {
       _model.restoreState(position);
+      retry = handlePage(position);
       yield* handlePage(position);
     });
   }
@@ -46,9 +49,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> getResponseFromRepo(int offset) async* {
+    retry = null;
     final stream = _repo.getPage(offset);
     await for (var value in stream) {
       yield* _model.onResponse(value);
     }
+  }
+
+  void onRetryClicked() {
+    retry();
   }
 }

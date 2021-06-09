@@ -20,12 +20,17 @@ class ListViewData {
 
 class InfoViewData {
   String? message;
+  Position position;
 
-  InfoViewData(this.message);
+  InfoViewData(this.message, this.position);
 }
 
 class DetailPageData {
   String pokemon;
 
   DetailPageData(this.pokemon);
+}
+
+enum Position {
+  top, middle, bottom
 }
