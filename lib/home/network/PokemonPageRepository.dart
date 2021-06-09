@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutterdex/common/data/PokeApiPage.dart';
 import 'package:flutterdex/common/network/data/NetworkResource.dart';
-import 'package:flutterdex/generated/locale_keys.g.dart';
 import 'package:flutterdex/home/network/PokemonPageDataSource.dart';
 import 'package:injectable/injectable.dart';
 
@@ -20,12 +19,10 @@ class PokemonPageRepository {
       if (page == null) {
         yield NetworkResource.loading();
         page = await _networkDataSource.getPage(offset);
-        if (page != null) {
-          yield NetworkResource(page.copyWith(offset: offset));
-        }
+        yield NetworkResource(page!.copyWith(offset: offset));
       }
-    } on Exception catch (e) {
-      yield NetworkResource.error(LocaleKeys.error);
+    } on Exception {
+      yield NetworkResource.error();
     }
   }
 }

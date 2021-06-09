@@ -11,6 +11,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final HomeModel _model = HomeModel();
 
   HomeBloc(this._repo) : super(HomeState());
+
   var retry;
 
   @override
@@ -38,12 +39,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Stream<HomeState> handleStartOfPage() async* {
     if (_model.canLoadPrevious()) {
+      _model.setIsRequestForNextPage(false);
       yield* getResponseFromRepo(_model.getPreviousOffset());
     }
   }
 
   Stream<HomeState> handleEndOfPage() async* {
     if (_model.canLoadNext()) {
+      _model.setIsRequestForNextPage(true);
       yield* getResponseFromRepo(_model.getNextOffset());
     }
   }

@@ -6,8 +6,14 @@ import 'package:flutterdex/home/presentation/HomeState.dart';
 class HomeModel {
   PokemonPage _page = PokemonPage();
 
+  bool _isRequestForNextPage = true;
+
   void restoreState(int offset) {
     _page = _page.copyWith(next: offset);
+  }
+
+  void setIsRequestForNextPage(bool isNextPage) {
+    _isRequestForNextPage = isNextPage;
   }
 
   bool canLoadPrevious() {
@@ -39,11 +45,20 @@ class HomeModel {
   }
 
   Stream<HomeState> handleLoading() async* {
-    yield mapToHomeState().copyWith(loading: InfoViewData(null));
+    yield mapToHomeState()
+        .copyWith(loading: InfoViewData(null, _getPosition()));
   }
 
   Stream<HomeState> handleError(String? message) async* {
-    yield mapToHomeState().copyWith(error: InfoViewData(null));
+    yield mapToHomeState().copyWith(error: InfoViewData(null, _getPosition()));
+  }
+
+  Position _getPosition() {
+    return _hasListItems()
+        ? Position.middle
+        : _isRequestForNextPage
+            ? Position.bottom
+            : Position.top;
   }
 
   HomeState onClicked(int position) {
