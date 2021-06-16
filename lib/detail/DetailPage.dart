@@ -13,82 +13,84 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-        backgroundColor: offblack,
+        backgroundColor: Colors.white,
         appBar: PlatformAppBar(
           backgroundColor: lightGrey,
           title: CustomPlatformText(id ?? "missingno",
               style: TextStyle(color: gold)),
         ),
-        body: new SafeArea(child: _testBody()));
+        body: _body());
   }
 
   Widget _testBody() {
-    return Column(
-      children: [
-        _card(black, barBackgroundColor: mutedGold),
-        Row(
-          children: [
-            Column(
-              children: [
-                Text("OffWhite",
-                    style: TextStyle(
-                        color: offwhite,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
-                Text("Gold",
-                    style: TextStyle(
-                        color: gold,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
-                Text("MutedGold",
-                    style: TextStyle(
-                        color: mutedGold,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
-              ],
-            ),
-            Column(
-              children: [
-                Text("OffWhite",
-                    style: TextStyle(
-                        color: offwhite,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20)),
-                Text("Gold",
-                    style: TextStyle(
-                        color: gold,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20)),
-                Text("MutedGold",
-                    style: TextStyle(
-                        color: mutedGold,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20)),
-              ],
-            ),
-            Column(
-              children: [
-                Text("White",
-                    style: TextStyle(
-                        color: white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20))
-              ],
-            ),
-            Column(
-              children: [
-                Text("White",
-                    style: TextStyle(
-                        color: white,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20))
-              ],
-            ),
-          ],
-        ),
-        _card(lightGrey, barBackgroundColor: grey),
-        _card(darkGrey, barBackgroundColor: lightGrey)
-      ],
+    return SafeArea(
+      child: Column(
+        children: [
+          _card(black, barBackgroundColor: mutedGold),
+          Row(
+            children: [
+              Column(
+                children: [
+                  Text("OffWhite",
+                      style: TextStyle(
+                          color: offwhite,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20)),
+                  Text("Gold",
+                      style: TextStyle(
+                          color: gold,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20)),
+                  Text("MutedGold",
+                      style: TextStyle(
+                          color: mutedGold,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20)),
+                ],
+              ),
+              Column(
+                children: [
+                  Text("OffWhite",
+                      style: TextStyle(
+                          color: offwhite,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 20)),
+                  Text("Gold",
+                      style: TextStyle(
+                          color: gold,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 20)),
+                  Text("MutedGold",
+                      style: TextStyle(
+                          color: mutedGold,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 20)),
+                ],
+              ),
+              Column(
+                children: [
+                  Text("White",
+                      style: TextStyle(
+                          color: white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20))
+                ],
+              ),
+              Column(
+                children: [
+                  Text("White",
+                      style: TextStyle(
+                          color: white,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 20))
+                ],
+              ),
+            ],
+          ),
+          _card(lightGrey, barBackgroundColor: grey),
+          _card(darkGrey, barBackgroundColor: lightGrey)
+        ],
+      ),
     );
   }
 
@@ -177,7 +179,7 @@ class DetailPage extends StatelessWidget {
           child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [AspectRatio(child: _body(), aspectRatio: 2 / 1)])),
+              children: [AspectRatio(child: _graph(), aspectRatio: 2 / 1)])),
     );
   }
 

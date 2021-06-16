@@ -270,9 +270,9 @@ packages:
   fl_chart:
     dependency: "direct main"
     description:
-      name: fl_chart
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "packages/fl_chart/pubspec.lock"
+      relative: true
+    source: path
     version: "0.36.1"
   flutter:
     dependency: "direct main"
