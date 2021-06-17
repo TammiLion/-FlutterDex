@@ -18,8 +18,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (retry != null) yield state;
 
-    yield* event.when((position) async* {
-      yield _model.onClicked(position);
+    yield* event.when((name) async* {
+      yield _model.onClicked(name);
     }, startOfPage: () async* {
       retry = handleStartOfPage();
       yield* handleStartOfPage();
@@ -30,6 +30,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       _model.restoreState(position);
       retry = handlePage(position);
       yield* handlePage(position);
+    }, retry: () async* {
+      yield* onRetryClicked();
     });
   }
 
@@ -59,7 +61,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  void onRetryClicked() {
-    retry();
+  Stream<HomeState> onRetryClicked() async* {
+    yield* retry();
   }
 }

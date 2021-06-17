@@ -1,15 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutterdex/common/ui/ClickSupport.dart';
 import 'package:flutterdex/common/ui/CustomPlatformText.dart';
+import 'package:flutterdex/common/ui/ErrorWidget.dart';
+import 'package:flutterdex/common/ui/Loading.dart';
 import 'package:flutterdex/common/util/extensions.dart';
 import 'package:flutterdex/generated/locale_keys.g.dart';
 import 'package:flutterdex/home/blocs/HomeBloc.dart';
 import 'package:flutterdex/home/blocs/HomeEvent.dart';
 import 'package:flutterdex/home/presentation/HomeState.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -78,22 +81,33 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
       Modular.to.pushNamed('/pokemon/${it.pokemon}');
     });
 
-    return names == null ? Container() : _buildList(names);
+    if (state.loading?.position == Position.center) {
+      return Loading(text: state.loading!.message);
+    } else if (state.error?.position == Position.center) {
+      return ErrorSupport(
+          text: LocaleKeys.error,
+          onClick: () => {context.read<HomeBloc>().add(HomeEvent.retry())});
+    }
+    return names == null ? Container() : _buildList(state, names);
   }
 
-  Widget _buildList(List<String> names) {
+  int _getListItemCount(HomeState state, List<String> names) {
+    return names.length;
+  }
+
+  Widget _buildList(HomeState state, List<String> names) {
     return ListView.builder(
         controller: _scrollController,
-        itemCount: names.length,
+        itemCount: _getListItemCount(state, names),
         itemBuilder: (BuildContext _context, int i) {
           return _buildRow(names[i], i);
         });
   }
 
   Widget _buildRow(String name, int pos) {
-    return GestureDetector(
-        onTap: () {
-          context.read<HomeBloc>().add(HomeEvent(pos));
+    return ClickSupport(
+        onClick: () {
+          context.read<HomeBloc>().add(HomeEvent(name));
         },
         child: Container(
             key: UniqueKey(),

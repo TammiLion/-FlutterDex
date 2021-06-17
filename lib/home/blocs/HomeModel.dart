@@ -55,15 +55,15 @@ class HomeModel {
 
   Position _getPosition() {
     return _hasListItems()
-        ? Position.middle
+        ? Position.center
         : _isRequestForNextPage
             ? Position.bottom
             : Position.top;
   }
 
-  HomeState onClicked(int position) {
+  HomeState onClicked(String name) {
     return mapToHomeState()
-        .copyWith(detailPage: DetailPageData(_page.results[position]));
+        .copyWith(detailPage: DetailPageData(name));
   }
 
   HomeState mapToHomeState() {

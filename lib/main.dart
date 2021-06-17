@@ -5,9 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutterdex/common/di/injection.dart';
-import 'package:flutterdex/common/util/extensions.dart';
 import 'package:flutterdex/home/blocs/HomeBloc.dart';
 import 'package:flutterdex/modules/AppModule.dart';
 import 'package:injectable/injectable.dart';
@@ -40,20 +38,9 @@ class FlutterDexApp extends StatelessWidget {
   }
 }
 
-Widget _getPlatformApp(BuildContext context) {
-  return PlatformApp(
-          initialRoute: "/pokemon",
-          restorationScopeId: 'app',
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale)
-      .modular();
-}
-
-//TODO make it work if possible
 Widget _getMaterialApp(BuildContext context) {
   return MaterialApp(
-          initialRoute: "/pokemon",
+      initialRoute: "/pokemon",
           restorationScopeId: 'app',
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,

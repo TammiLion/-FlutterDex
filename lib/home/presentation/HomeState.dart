@@ -32,5 +32,5 @@ class DetailPageData {
 }
 
 enum Position {
-  top, middle, bottom
+  top, center, bottom
 }

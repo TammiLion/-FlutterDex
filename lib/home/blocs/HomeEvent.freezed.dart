@@ -16,9 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$HomeEventTearOff {
   const _$HomeEventTearOff();
 
-  PokemonClicked call(int position) {
+  PokemonClicked call(String name) {
     return PokemonClicked(
-      position,
+      name,
     );
   }
 
@@ -35,6 +35,10 @@ class _$HomeEventTearOff {
   EndOfPage endOfPage() {
     return const EndOfPage();
   }
+
+  Retry retry() {
+    return const Retry();
+  }
 }
 
 /// @nodoc
@@ -44,18 +48,20 @@ const $HomeEvent = _$HomeEventTearOff();
 mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int position) $default, {
+    TResult Function(String name) $default, {
     required TResult Function(int position) restoreState,
     required TResult Function() startOfPage,
     required TResult Function() endOfPage,
+    required TResult Function() retry,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int position)? $default, {
+    TResult Function(String name)? $default, {
     TResult Function(int position)? restoreState,
     TResult Function()? startOfPage,
     TResult Function()? endOfPage,
+    TResult Function()? retry,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,6 +71,7 @@ mixin _$HomeEvent {
     required TResult Function(RestoreState value) restoreState,
     required TResult Function(StartOfPage value) startOfPage,
     required TResult Function(EndOfPage value) endOfPage,
+    required TResult Function(Retry value) retry,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,6 +80,7 @@ mixin _$HomeEvent {
     TResult Function(RestoreState value)? restoreState,
     TResult Function(StartOfPage value)? startOfPage,
     TResult Function(EndOfPage value)? endOfPage,
+    TResult Function(Retry value)? retry,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -98,7 +106,7 @@ abstract class $PokemonClickedCopyWith<$Res> {
   factory $PokemonClickedCopyWith(
           PokemonClicked value, $Res Function(PokemonClicked) then) =
       _$PokemonClickedCopyWithImpl<$Res>;
-  $Res call({int position});
+  $Res call({String name});
 }
 
 /// @nodoc
@@ -113,27 +121,27 @@ class _$PokemonClickedCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? position = freezed,
+    Object? name = freezed,
   }) {
     return _then(PokemonClicked(
-      position == freezed
-          ? _value.position
-          : position // ignore: cast_nullable_to_non_nullable
-              as int,
+      name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 class _$PokemonClicked with DiagnosticableTreeMixin implements PokemonClicked {
-  const _$PokemonClicked(this.position);
+  const _$PokemonClicked(this.name);
 
   @override
-  final int position;
+  final String name;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeEvent(position: $position)';
+    return 'HomeEvent(name: $name)';
   }
 
   @override
@@ -141,21 +149,20 @@ class _$PokemonClicked with DiagnosticableTreeMixin implements PokemonClicked {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'HomeEvent'))
-      ..add(DiagnosticsProperty('position', position));
+      ..add(DiagnosticsProperty('name', name));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is PokemonClicked &&
-            (identical(other.position, position) ||
-                const DeepCollectionEquality()
-                    .equals(other.position, position)));
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(position);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(name);
 
   @JsonKey(ignore: true)
   @override
@@ -165,25 +172,27 @@ class _$PokemonClicked with DiagnosticableTreeMixin implements PokemonClicked {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int position) $default, {
+    TResult Function(String name) $default, {
     required TResult Function(int position) restoreState,
     required TResult Function() startOfPage,
     required TResult Function() endOfPage,
+    required TResult Function() retry,
   }) {
-    return $default(position);
+    return $default(name);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int position)? $default, {
+    TResult Function(String name)? $default, {
     TResult Function(int position)? restoreState,
     TResult Function()? startOfPage,
     TResult Function()? endOfPage,
+    TResult Function()? retry,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(position);
+      return $default(name);
     }
     return orElse();
   }
@@ -195,6 +204,7 @@ class _$PokemonClicked with DiagnosticableTreeMixin implements PokemonClicked {
     required TResult Function(RestoreState value) restoreState,
     required TResult Function(StartOfPage value) startOfPage,
     required TResult Function(EndOfPage value) endOfPage,
+    required TResult Function(Retry value) retry,
   }) {
     return $default(this);
   }
@@ -206,6 +216,7 @@ class _$PokemonClicked with DiagnosticableTreeMixin implements PokemonClicked {
     TResult Function(RestoreState value)? restoreState,
     TResult Function(StartOfPage value)? startOfPage,
     TResult Function(EndOfPage value)? endOfPage,
+    TResult Function(Retry value)? retry,
     required TResult orElse(),
   }) {
     if ($default != null) {
@@ -216,9 +227,9 @@ class _$PokemonClicked with DiagnosticableTreeMixin implements PokemonClicked {
 }
 
 abstract class PokemonClicked implements HomeEvent {
-  const factory PokemonClicked(int position) = _$PokemonClicked;
+  const factory PokemonClicked(String name) = _$PokemonClicked;
 
-  int get position => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $PokemonClickedCopyWith<PokemonClicked> get copyWith =>
       throw _privateConstructorUsedError;
@@ -296,10 +307,11 @@ class _$RestoreState with DiagnosticableTreeMixin implements RestoreState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int position) $default, {
+    TResult Function(String name) $default, {
     required TResult Function(int position) restoreState,
     required TResult Function() startOfPage,
     required TResult Function() endOfPage,
+    required TResult Function() retry,
   }) {
     return restoreState(position);
   }
@@ -307,10 +319,11 @@ class _$RestoreState with DiagnosticableTreeMixin implements RestoreState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int position)? $default, {
+    TResult Function(String name)? $default, {
     TResult Function(int position)? restoreState,
     TResult Function()? startOfPage,
     TResult Function()? endOfPage,
+    TResult Function()? retry,
     required TResult orElse(),
   }) {
     if (restoreState != null) {
@@ -326,6 +339,7 @@ class _$RestoreState with DiagnosticableTreeMixin implements RestoreState {
     required TResult Function(RestoreState value) restoreState,
     required TResult Function(StartOfPage value) startOfPage,
     required TResult Function(EndOfPage value) endOfPage,
+    required TResult Function(Retry value) retry,
   }) {
     return restoreState(this);
   }
@@ -337,6 +351,7 @@ class _$RestoreState with DiagnosticableTreeMixin implements RestoreState {
     TResult Function(RestoreState value)? restoreState,
     TResult Function(StartOfPage value)? startOfPage,
     TResult Function(EndOfPage value)? endOfPage,
+    TResult Function(Retry value)? retry,
     required TResult orElse(),
   }) {
     if (restoreState != null) {
@@ -399,10 +414,11 @@ class _$StartOfPage with DiagnosticableTreeMixin implements StartOfPage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int position) $default, {
+    TResult Function(String name) $default, {
     required TResult Function(int position) restoreState,
     required TResult Function() startOfPage,
     required TResult Function() endOfPage,
+    required TResult Function() retry,
   }) {
     return startOfPage();
   }
@@ -410,10 +426,11 @@ class _$StartOfPage with DiagnosticableTreeMixin implements StartOfPage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int position)? $default, {
+    TResult Function(String name)? $default, {
     TResult Function(int position)? restoreState,
     TResult Function()? startOfPage,
     TResult Function()? endOfPage,
+    TResult Function()? retry,
     required TResult orElse(),
   }) {
     if (startOfPage != null) {
@@ -429,6 +446,7 @@ class _$StartOfPage with DiagnosticableTreeMixin implements StartOfPage {
     required TResult Function(RestoreState value) restoreState,
     required TResult Function(StartOfPage value) startOfPage,
     required TResult Function(EndOfPage value) endOfPage,
+    required TResult Function(Retry value) retry,
   }) {
     return startOfPage(this);
   }
@@ -440,6 +458,7 @@ class _$StartOfPage with DiagnosticableTreeMixin implements StartOfPage {
     TResult Function(RestoreState value)? restoreState,
     TResult Function(StartOfPage value)? startOfPage,
     TResult Function(EndOfPage value)? endOfPage,
+    TResult Function(Retry value)? retry,
     required TResult orElse(),
   }) {
     if (startOfPage != null) {
@@ -495,10 +514,11 @@ class _$EndOfPage with DiagnosticableTreeMixin implements EndOfPage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(int position) $default, {
+    TResult Function(String name) $default, {
     required TResult Function(int position) restoreState,
     required TResult Function() startOfPage,
     required TResult Function() endOfPage,
+    required TResult Function() retry,
   }) {
     return endOfPage();
   }
@@ -506,10 +526,11 @@ class _$EndOfPage with DiagnosticableTreeMixin implements EndOfPage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(int position)? $default, {
+    TResult Function(String name)? $default, {
     TResult Function(int position)? restoreState,
     TResult Function()? startOfPage,
     TResult Function()? endOfPage,
+    TResult Function()? retry,
     required TResult orElse(),
   }) {
     if (endOfPage != null) {
@@ -525,6 +546,7 @@ class _$EndOfPage with DiagnosticableTreeMixin implements EndOfPage {
     required TResult Function(RestoreState value) restoreState,
     required TResult Function(StartOfPage value) startOfPage,
     required TResult Function(EndOfPage value) endOfPage,
+    required TResult Function(Retry value) retry,
   }) {
     return endOfPage(this);
   }
@@ -536,6 +558,7 @@ class _$EndOfPage with DiagnosticableTreeMixin implements EndOfPage {
     TResult Function(RestoreState value)? restoreState,
     TResult Function(StartOfPage value)? startOfPage,
     TResult Function(EndOfPage value)? endOfPage,
+    TResult Function(Retry value)? retry,
     required TResult orElse(),
   }) {
     if (endOfPage != null) {
@@ -547,4 +570,104 @@ class _$EndOfPage with DiagnosticableTreeMixin implements EndOfPage {
 
 abstract class EndOfPage implements HomeEvent {
   const factory EndOfPage() = _$EndOfPage;
+}
+
+/// @nodoc
+abstract class $RetryCopyWith<$Res> {
+  factory $RetryCopyWith(Retry value, $Res Function(Retry) then) =
+      _$RetryCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$RetryCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res>
+    implements $RetryCopyWith<$Res> {
+  _$RetryCopyWithImpl(Retry _value, $Res Function(Retry) _then)
+      : super(_value, (v) => _then(v as Retry));
+
+  @override
+  Retry get _value => super._value as Retry;
+}
+
+/// @nodoc
+class _$Retry with DiagnosticableTreeMixin implements Retry {
+  const _$Retry();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeEvent.retry()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'HomeEvent.retry'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is Retry);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String name) $default, {
+    required TResult Function(int position) restoreState,
+    required TResult Function() startOfPage,
+    required TResult Function() endOfPage,
+    required TResult Function() retry,
+  }) {
+    return retry();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String name)? $default, {
+    TResult Function(int position)? restoreState,
+    TResult Function()? startOfPage,
+    TResult Function()? endOfPage,
+    TResult Function()? retry,
+    required TResult orElse(),
+  }) {
+    if (retry != null) {
+      return retry();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(PokemonClicked value) $default, {
+    required TResult Function(RestoreState value) restoreState,
+    required TResult Function(StartOfPage value) startOfPage,
+    required TResult Function(EndOfPage value) endOfPage,
+    required TResult Function(Retry value) retry,
+  }) {
+    return retry(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(PokemonClicked value)? $default, {
+    TResult Function(RestoreState value)? restoreState,
+    TResult Function(StartOfPage value)? startOfPage,
+    TResult Function(EndOfPage value)? endOfPage,
+    TResult Function(Retry value)? retry,
+    required TResult orElse(),
+  }) {
+    if (retry != null) {
+      return retry(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Retry implements HomeEvent {
+  const factory Retry() = _$Retry;
 }
