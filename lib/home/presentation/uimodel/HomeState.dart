@@ -1,3 +1,4 @@
+import 'package:flutterdex/common/data/Resource.dart';
 import 'package:flutterdex/home/presentation/uimodel/ListItem.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';

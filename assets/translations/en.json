@@ -8,5 +8,6 @@
     "other":"Hello {}"
   },
   "error": "An error occured",
+  "loading": "Loading",
   "title": "FlutterDex EN"
 }

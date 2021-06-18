@@ -1,5 +1,5 @@
 import 'package:flutterdex/common/data/PokeApiPage.dart';
-import 'package:flutterdex/common/network/data/NetworkResource.dart';
+import 'package:flutterdex/common/data/Resource.dart';
 import 'package:flutterdex/home/network/data/PokemonPage.dart';
 import 'package:flutterdex/home/presentation/uimodel/HomeState.dart';
 
@@ -32,25 +32,25 @@ class HomeModel {
     return _page.next!;
   }
 
-  Stream<HomeState> onResponse(NetworkResource<PokeApiPage> response) async* {
-    yield* response.when((data) => handleData(data),
+  HomeState onResponse(Resource<PokeApiPage> response) {
+    return response.when((data) => handleData(data),
         loading: () => handleLoading(),
         error: (errorMessage) => handleError(errorMessage));
   }
 
-  Stream<HomeState> handleData(PokeApiPage data) async* {
+  HomeState handleData(PokeApiPage data) {
     _page = _page.update(data);
-    yield HomeState(
+    return HomeState(
         list: ListViewData(_page.results), loading: null, error: null);
   }
 
-  Stream<HomeState> handleLoading() async* {
-    yield mapToHomeState()
+  HomeState handleLoading() {
+    return mapToHomeState()
         .copyWith(loading: InfoViewData(null, _getPosition()));
   }
 
-  Stream<HomeState> handleError(String? message) async* {
-    yield mapToHomeState().copyWith(error: InfoViewData(null, _getPosition()));
+  HomeState handleError(String? message) {
+    return mapToHomeState().copyWith(error: InfoViewData(null, _getPosition()));
   }
 
   Position _getPosition() {

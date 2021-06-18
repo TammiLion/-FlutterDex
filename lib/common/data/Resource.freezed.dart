@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'NetworkResource.dart';
+part of 'Resource.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,8 +13,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$NetworkResourceTearOff {
-  const _$NetworkResourceTearOff();
+class _$ResourceTearOff {
+  const _$ResourceTearOff();
 
   Data<T> call<T>(T data) {
     return Data<T>(
@@ -34,10 +34,10 @@ class _$NetworkResourceTearOff {
 }
 
 /// @nodoc
-const $NetworkResource = _$NetworkResourceTearOff();
+const $Resource = _$ResourceTearOff();
 
 /// @nodoc
-mixin _$NetworkResource<T> {
+mixin _$Resource<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(T data) $default, {
@@ -71,20 +71,19 @@ mixin _$NetworkResource<T> {
 }
 
 /// @nodoc
-abstract class $NetworkResourceCopyWith<T, $Res> {
-  factory $NetworkResourceCopyWith(
-          NetworkResource<T> value, $Res Function(NetworkResource<T>) then) =
-      _$NetworkResourceCopyWithImpl<T, $Res>;
+abstract class $ResourceCopyWith<T, $Res> {
+  factory $ResourceCopyWith(
+          Resource<T> value, $Res Function(Resource<T>) then) =
+      _$ResourceCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class _$NetworkResourceCopyWithImpl<T, $Res>
-    implements $NetworkResourceCopyWith<T, $Res> {
-  _$NetworkResourceCopyWithImpl(this._value, this._then);
+class _$ResourceCopyWithImpl<T, $Res> implements $ResourceCopyWith<T, $Res> {
+  _$ResourceCopyWithImpl(this._value, this._then);
 
-  final NetworkResource<T> _value;
+  final Resource<T> _value;
   // ignore: unused_field
-  final $Res Function(NetworkResource<T>) _then;
+  final $Res Function(Resource<T>) _then;
 }
 
 /// @nodoc
@@ -95,7 +94,7 @@ abstract class $DataCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class _$DataCopyWithImpl<T, $Res> extends _$NetworkResourceCopyWithImpl<T, $Res>
+class _$DataCopyWithImpl<T, $Res> extends _$ResourceCopyWithImpl<T, $Res>
     implements $DataCopyWith<T, $Res> {
   _$DataCopyWithImpl(Data<T> _value, $Res Function(Data<T>) _then)
       : super(_value, (v) => _then(v as Data<T>));
@@ -125,14 +124,14 @@ class _$Data<T> with DiagnosticableTreeMixin implements Data<T> {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NetworkResource<$T>(data: $data)';
+    return 'Resource<$T>(data: $data)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'NetworkResource<$T>'))
+      ..add(DiagnosticsProperty('type', 'Resource<$T>'))
       ..add(DiagnosticsProperty('data', data));
   }
 
@@ -202,7 +201,7 @@ class _$Data<T> with DiagnosticableTreeMixin implements Data<T> {
   }
 }
 
-abstract class Data<T> implements NetworkResource<T> {
+abstract class Data<T> implements Resource<T> {
   const factory Data(T data) = _$Data<T>;
 
   T get data => throw _privateConstructorUsedError;
@@ -217,8 +216,7 @@ abstract class $LoadingCopyWith<T, $Res> {
 }
 
 /// @nodoc
-class _$LoadingCopyWithImpl<T, $Res>
-    extends _$NetworkResourceCopyWithImpl<T, $Res>
+class _$LoadingCopyWithImpl<T, $Res> extends _$ResourceCopyWithImpl<T, $Res>
     implements $LoadingCopyWith<T, $Res> {
   _$LoadingCopyWithImpl(Loading<T> _value, $Res Function(Loading<T>) _then)
       : super(_value, (v) => _then(v as Loading<T>));
@@ -233,13 +231,13 @@ class _$Loading<T> with DiagnosticableTreeMixin implements Loading<T> {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NetworkResource<$T>.loading()';
+    return 'Resource<$T>.loading()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'NetworkResource<$T>.loading'));
+    properties..add(DiagnosticsProperty('type', 'Resource<$T>.loading'));
   }
 
   @override
@@ -299,7 +297,7 @@ class _$Loading<T> with DiagnosticableTreeMixin implements Loading<T> {
   }
 }
 
-abstract class Loading<T> implements NetworkResource<T> {
+abstract class Loading<T> implements Resource<T> {
   const factory Loading() = _$Loading<T>;
 }
 
@@ -313,7 +311,7 @@ abstract class $ErrorDetailsCopyWith<T, $Res> {
 
 /// @nodoc
 class _$ErrorDetailsCopyWithImpl<T, $Res>
-    extends _$NetworkResourceCopyWithImpl<T, $Res>
+    extends _$ResourceCopyWithImpl<T, $Res>
     implements $ErrorDetailsCopyWith<T, $Res> {
   _$ErrorDetailsCopyWithImpl(
       ErrorDetails<T> _value, $Res Function(ErrorDetails<T>) _then)
@@ -346,14 +344,14 @@ class _$ErrorDetails<T>
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NetworkResource<$T>.error(message: $message)';
+    return 'Resource<$T>.error(message: $message)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'NetworkResource<$T>.error'))
+      ..add(DiagnosticsProperty('type', 'Resource<$T>.error'))
       ..add(DiagnosticsProperty('message', message));
   }
 
@@ -423,7 +421,7 @@ class _$ErrorDetails<T>
   }
 }
 
-abstract class ErrorDetails<T> implements NetworkResource<T> {
+abstract class ErrorDetails<T> implements Resource<T> {
   const factory ErrorDetails([String? message]) = _$ErrorDetails<T>;
 
   String? get message => throw _privateConstructorUsedError;

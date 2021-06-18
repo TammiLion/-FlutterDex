@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
   }
 
   void _restoreState() {
-    context.read<HomeBloc>().add(HomeEvent.restoreState(_scrollPosition.value));
+    context.read<HomeBloc>().onRestore(_scrollPosition.value);
   }
 
   void _setupScrollListener() {
@@ -40,9 +40,9 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
       if (_scrollController.position.atEdge) {
         _scrollPosition.value++;
         if (_scrollController.position.pixels == 0) {
-          context.read<HomeBloc>().add(HomeEvent.startOfPage());
+          context.read<HomeBloc>().onStartOfPage();
         } else {
-          context.read<HomeBloc>().add(HomeEvent.endOfPage());
+          context.read<HomeBloc>().onEndOfPage();
         }
       }
     });
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
   }
 
   void _retry() {
-    context.read<HomeBloc>().retry();
+    context.read<HomeBloc>().onRetry();
   }
 
   void _navigateToPokemonPage(String name) {

@@ -1,67 +1,60 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterdex/home/blocs/HomeEvent.dart';
+import 'package:flutterdex/generated/locale_keys.g.dart';
 import 'package:flutterdex/home/blocs/HomeModel.dart';
 import 'package:flutterdex/home/network/PokemonPageRepository.dart';
 import 'package:flutterdex/home/presentation/uimodel/HomeState.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
+class HomeBloc extends Cubit<HomeState> {
   final PokemonPageRepository _repo;
   final HomeModel _model = HomeModel();
 
-  HomeBloc(this._repo) : super(HomeState());
+  HomeBloc(this._repo) : super(HomeState.loading(LocaleKeys.loading));
 
-  var retry;
+  var _retry;
 
-  @override
-  Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    if (retry != null) yield state;
-
-    yield* event.when((name) async* {
-      yield _model.onClicked(name);
-    }, startOfPage: () async* {
-      retry = handleStartOfPage();
-      yield* handleStartOfPage();
-    }, endOfPage: () async* {
-      retry = handleEndOfPage();
-      yield* handleEndOfPage();
-    }, restoreState: (int position) async* {
-      _model.restoreState(position);
-      retry = handlePage(position);
-      yield* handlePage(position);
-    }, retry: () async* {
-      yield* onRetryClicked();
-    });
+  void onStartOfPage() {
+    _retry = handleStartOfPage;
+    handleStartOfPage();
   }
 
-  Stream<HomeState> handlePage(int position) async* {
-    yield* getResponseFromRepo(position);
+  void onEndOfPage() {
+    _retry = handleEndOfPage;
+    handleEndOfPage();
   }
 
-  Stream<HomeState> handleStartOfPage() async* {
+  void onRestore(int position) {
+    _retry = handlePage(position);
+    handlePage(position);
+  }
+
+  void onRetry() {
+    _retry();
+  }
+
+  void handlePage(int position) {
+    getResponseFromRepo(position);
+  }
+
+  void handleStartOfPage() {
     if (_model.canLoadPrevious()) {
       _model.setIsRequestForNextPage(false);
-      yield* getResponseFromRepo(_model.getPreviousOffset());
+      getResponseFromRepo(_model.getPreviousOffset());
     }
   }
 
-  Stream<HomeState> handleEndOfPage() async* {
+  void handleEndOfPage() {
     if (_model.canLoadNext()) {
       _model.setIsRequestForNextPage(true);
-      yield* getResponseFromRepo(_model.getNextOffset());
+      getResponseFromRepo(_model.getNextOffset());
     }
   }
 
-  Stream<HomeState> getResponseFromRepo(int offset) async* {
-    retry = null;
+  void getResponseFromRepo(int offset) async {
     final stream = _repo.getPage(offset);
     await for (var value in stream) {
-      yield* _model.onResponse(value);
+      emit(_model.onResponse(value));
     }
-  }
-
-  Stream<HomeState> onRetryClicked() async* {
-    yield* retry();
   }
 }
