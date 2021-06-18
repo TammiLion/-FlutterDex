@@ -8,7 +8,6 @@ import 'package:flutterdex/common/ui/ErrorView.dart';
 import 'package:flutterdex/common/ui/LoadingView.dart';
 import 'package:flutterdex/generated/locale_keys.g.dart';
 import 'package:flutterdex/home/blocs/HomeBloc.dart';
-import 'package:flutterdex/home/blocs/HomeEvent.dart';
 import 'package:flutterdex/home/presentation/HomeList.dart';
 import 'package:flutterdex/home/presentation/uimodel/HomeState.dart';
 import 'package:provider/provider.dart';
