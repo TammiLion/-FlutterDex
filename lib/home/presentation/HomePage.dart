@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutterdex/common/ui/ClickSupport.dart';
 import 'package:flutterdex/common/ui/CustomPlatformText.dart';
-import 'package:flutterdex/common/ui/ErrorWidget.dart';
-import 'package:flutterdex/common/ui/Loading.dart';
-import 'package:flutterdex/common/util/extensions.dart';
+import 'package:flutterdex/common/ui/ErrorView.dart';
+import 'package:flutterdex/common/ui/LoadingView.dart';
 import 'package:flutterdex/generated/locale_keys.g.dart';
 import 'package:flutterdex/home/blocs/HomeBloc.dart';
 import 'package:flutterdex/home/blocs/HomeEvent.dart';
-import 'package:flutterdex/home/presentation/HomeState.dart';
+import 'package:flutterdex/home/presentation/HomeList.dart';
+import 'package:flutterdex/home/presentation/uimodel/HomeState.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,13 +32,7 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
   }
 
   void _restoreState() {
-    if (_scrollPosition.value == 0) {
-      context.read<HomeBloc>().add(HomeEvent.endOfPage());
-    } else {
-      context
-          .read<HomeBloc>()
-          .add(HomeEvent.restoreState(_scrollPosition.value));
-    }
+    context.read<HomeBloc>().add(HomeEvent.restoreState(_scrollPosition.value));
   }
 
   void _setupScrollListener() {
@@ -75,66 +68,22 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
   }
 
   Widget _body(HomeState state) {
-    final names = state.list?.names;
-
-    state.detailPage?.let((it) {
-      Modular.to.pushNamed('/pokemon/${it.pokemon}');
-    });
-
-    if (state.loading?.position == Position.center) {
-      return Loading(text: state.loading!.message);
-    } else if (state.error?.position == Position.center) {
-      return ErrorSupport(
-          text: LocaleKeys.error,
-          onClick: () => {context.read<HomeBloc>().add(HomeEvent.retry())});
-    }
-    return names == null ? Container() : _buildList(state, names);
+    return state.when(
+        list: (list) => HomeList(
+            list: list,
+            scrollController: _scrollController,
+            onClickPokemon: (name) => _navigateToPokemonPage(name),
+            onClickError: _retry),
+        loading: (text) => LoadingView(text: text),
+        error: (text) => ErrorView(text: text, onClick: () => _retry()));
   }
 
-  int _getListItemCount(HomeState state, List<String> names) {
-    return names.length;
+  void _retry() {
+    context.read<HomeBloc>().retry();
   }
 
-  Widget _buildList(HomeState state, List<String> names) {
-    return ListView.builder(
-        controller: _scrollController,
-        itemCount: _getListItemCount(state, names),
-        itemBuilder: (BuildContext _context, int i) {
-          return _buildRow(names[i], i);
-        });
-  }
-
-  Widget _buildRow(String name, int pos) {
-    return ClickSupport(
-        onClick: () {
-          context.read<HomeBloc>().add(HomeEvent(name));
-        },
-        child: Container(
-            key: UniqueKey(),
-            color: getListItemColor(pos),
-            padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
-            child: CustomPlatformText(
-              name,
-              capitalizeFirst: true,
-              style: platformThemeData(context,
-                  material: (data) =>
-                      data.textTheme.headline4?.copyWith(color: Colors.black),
-                  cupertino: (data) => data.textTheme.navLargeTitleTextStyle),
-            )));
-  }
-
-  final List<Color> containerColors = [
-    Colors.red,
-    Colors.blue,
-    Colors.yellow,
-    Colors.orange,
-    Colors.purple,
-    Colors.green
-  ];
-
-  Color getListItemColor(int pos) {
-    final pickedColor = pos % containerColors.length;
-    return containerColors[pickedColor];
+  void _navigateToPokemonPage(String name) {
+    Modular.to.pushNamed('/pokemon/$name');
   }
 
   @override

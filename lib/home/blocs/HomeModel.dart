@@ -1,7 +1,7 @@
 import 'package:flutterdex/common/data/PokeApiPage.dart';
 import 'package:flutterdex/common/network/data/NetworkResource.dart';
 import 'package:flutterdex/home/network/data/PokemonPage.dart';
-import 'package:flutterdex/home/presentation/HomeState.dart';
+import 'package:flutterdex/home/presentation/uimodel/HomeState.dart';
 
 class HomeModel {
   PokemonPage _page = PokemonPage();

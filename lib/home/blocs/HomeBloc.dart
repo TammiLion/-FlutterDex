@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutterdex/home/blocs/HomeEvent.dart';
 import 'package:flutterdex/home/blocs/HomeModel.dart';
 import 'package:flutterdex/home/network/PokemonPageRepository.dart';
-import 'package:flutterdex/home/presentation/HomeState.dart';
+import 'package:flutterdex/home/presentation/uimodel/HomeState.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
