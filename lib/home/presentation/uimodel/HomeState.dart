@@ -8,7 +8,9 @@ part 'HomeState.freezed.dart';
 @freezed
 class HomeState with _$HomeState {
   const factory HomeState.list(List<ListItem> list) = Data;
-  const factory HomeState.loading(String text) = Loading;
-  const factory HomeState.error(String text) = Error;
+  const factory HomeState.loading({String? text}) = Loading;
+  const factory HomeState.error({String? text}) = Error;
 }
 
+//I could've written this using the generic Resource class
+//I decided not to because Resource<Resource<List<String>>> is difficult to read and understand

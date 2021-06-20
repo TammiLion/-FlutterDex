@@ -1,8 +1,7 @@
+abstract class LocalDataSource<T> {
+  bool contains(int index);
 
-import 'package:flutterdex/common/data/PokeApiPage.dart';
+  Future<T> get(int index);
 
-abstract class PokeApiPageDataSource {
-  Future<PokeApiPage?> getPage(int offset);
-
-  void addPage(int offset, PokeApiPage page);
+  void store(int index, T item);
 }

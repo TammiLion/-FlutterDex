@@ -9,10 +9,10 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import '../../home/blocs/HomeBloc.dart' as _i10;
-import '../../home/network/PokemonPageCache.dart' as _i8;
-import '../../home/network/PokemonPageDataSource.dart' as _i6;
-import '../../home/network/PokemonPageNetworkDataSource.dart' as _i7;
-import '../../home/network/PokemonPageRepository.dart' as _i9;
+import '../../home/network/PokemonPageCache.dart' as _i6;
+import '../../home/network/PokemonPageDataSource.dart' as _i8;
+import '../../home/network/PokemonPageRepository.dart' as _i7;
+import '../data/PokeApiPage.dart' as _i9;
 import '../network/api/ApiModule.dart' as _i5;
 import '../network/api/PokeApi.dart' as _i4;
 
@@ -30,16 +30,12 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i4.PokeApi>(() => apiModule.getPokeApi(get<_i3.Dio>()),
       registerFor: {_dev, _prod});
   gh.factory<_i4.PokeApi>(() => _i5.MockPokeApi(), registerFor: {_test});
-  gh.factory<_i6.PokeApiPageDataSource>(
-      () => _i7.PokemonPageNetworkDataSource(get<_i4.PokeApi>()),
-      instanceName: 'network');
-  gh.factory<_i6.PokeApiPageDataSource>(() => _i8.PokemonPageLocalDataSource(),
-      instanceName: 'local');
-  gh.lazySingleton<_i9.PokemonPageRepository>(() => _i9.PokemonPageRepository(
-      get<_i6.PokeApiPageDataSource>(instanceName: 'network'),
-      get<_i6.PokeApiPageDataSource>(instanceName: 'local')));
+  gh.factory<_i6.PokemonPageLocalDataSource>(
+      () => _i6.PokemonPageLocalDataSource());
+  gh.lazySingleton<_i7.PokemonPageRepository>(() => _i7.PokemonPageRepository(
+      get<_i4.PokeApi>(), get<_i8.LocalDataSource<_i9.PokeApiPage>>()));
   gh.factory<_i10.HomeBloc>(
-      () => _i10.HomeBloc(get<_i9.PokemonPageRepository>()));
+      () => _i10.HomeBloc(get<_i7.PokemonPageRepository>()));
   return get;
 }
 

@@ -22,15 +22,15 @@ class _$ListItemTearOff {
     );
   }
 
-  Loading loading(String text) {
+  Loading loading({String? text}) {
     return Loading(
-      text,
+      text: text,
     );
   }
 
-  Error error(String text) {
+  Error error({String? text}) {
     return Error(
-      text,
+      text: text,
     );
   }
 }
@@ -40,20 +40,18 @@ const $ListItem = _$ListItemTearOff();
 
 /// @nodoc
 mixin _$ListItem {
-  String get text => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) item,
-    required TResult Function(String text) loading,
-    required TResult Function(String text) error,
+    required TResult Function(String? text) loading,
+    required TResult Function(String? text) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? item,
-    TResult Function(String text)? loading,
-    TResult Function(String text)? error,
+    TResult Function(String? text)? loading,
+    TResult Function(String? text)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -72,17 +70,12 @@ mixin _$ListItem {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ListItemCopyWith<ListItem> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ListItemCopyWith<$Res> {
   factory $ListItemCopyWith(ListItem value, $Res Function(ListItem) then) =
       _$ListItemCopyWithImpl<$Res>;
-  $Res call({String text});
 }
 
 /// @nodoc
@@ -92,25 +85,12 @@ class _$ListItemCopyWithImpl<$Res> implements $ListItemCopyWith<$Res> {
   final ListItem _value;
   // ignore: unused_field
   final $Res Function(ListItem) _then;
-
-  @override
-  $Res call({
-    Object? text = freezed,
-  }) {
-    return _then(_value.copyWith(
-      text: text == freezed
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class $DataCopyWith<$Res> implements $ListItemCopyWith<$Res> {
+abstract class $DataCopyWith<$Res> {
   factory $DataCopyWith(Data value, $Res Function(Data) then) =
       _$DataCopyWithImpl<$Res>;
-  @override
   $Res call({String text});
 }
 
@@ -177,8 +157,8 @@ class _$Data with DiagnosticableTreeMixin implements Data {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) item,
-    required TResult Function(String text) loading,
-    required TResult Function(String text) error,
+    required TResult Function(String? text) loading,
+    required TResult Function(String? text) error,
   }) {
     return item(text);
   }
@@ -187,8 +167,8 @@ class _$Data with DiagnosticableTreeMixin implements Data {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? item,
-    TResult Function(String text)? loading,
-    TResult Function(String text)? error,
+    TResult Function(String? text)? loading,
+    TResult Function(String? text)? error,
     required TResult orElse(),
   }) {
     if (item != null) {
@@ -225,19 +205,16 @@ class _$Data with DiagnosticableTreeMixin implements Data {
 abstract class Data implements ListItem {
   const factory Data(String text) = _$Data;
 
-  @override
   String get text => throw _privateConstructorUsedError;
-  @override
   @JsonKey(ignore: true)
   $DataCopyWith<Data> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LoadingCopyWith<$Res> implements $ListItemCopyWith<$Res> {
+abstract class $LoadingCopyWith<$Res> {
   factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
       _$LoadingCopyWithImpl<$Res>;
-  @override
-  $Res call({String text});
+  $Res call({String? text});
 }
 
 /// @nodoc
@@ -254,20 +231,20 @@ class _$LoadingCopyWithImpl<$Res> extends _$ListItemCopyWithImpl<$Res>
     Object? text = freezed,
   }) {
     return _then(Loading(
-      text == freezed
+      text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 class _$Loading with DiagnosticableTreeMixin implements Loading {
-  const _$Loading(this.text);
+  const _$Loading({this.text});
 
   @override
-  final String text;
+  final String? text;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -303,8 +280,8 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) item,
-    required TResult Function(String text) loading,
-    required TResult Function(String text) error,
+    required TResult Function(String? text) loading,
+    required TResult Function(String? text) error,
   }) {
     return loading(text);
   }
@@ -313,8 +290,8 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? item,
-    TResult Function(String text)? loading,
-    TResult Function(String text)? error,
+    TResult Function(String? text)? loading,
+    TResult Function(String? text)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -349,21 +326,18 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
 }
 
 abstract class Loading implements ListItem {
-  const factory Loading(String text) = _$Loading;
+  const factory Loading({String? text}) = _$Loading;
 
-  @override
-  String get text => throw _privateConstructorUsedError;
-  @override
+  String? get text => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $LoadingCopyWith<Loading> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ErrorCopyWith<$Res> implements $ListItemCopyWith<$Res> {
+abstract class $ErrorCopyWith<$Res> {
   factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
       _$ErrorCopyWithImpl<$Res>;
-  @override
-  $Res call({String text});
+  $Res call({String? text});
 }
 
 /// @nodoc
@@ -380,20 +354,20 @@ class _$ErrorCopyWithImpl<$Res> extends _$ListItemCopyWithImpl<$Res>
     Object? text = freezed,
   }) {
     return _then(Error(
-      text == freezed
+      text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 class _$Error with DiagnosticableTreeMixin implements Error {
-  const _$Error(this.text);
+  const _$Error({this.text});
 
   @override
-  final String text;
+  final String? text;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -429,8 +403,8 @@ class _$Error with DiagnosticableTreeMixin implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String text) item,
-    required TResult Function(String text) loading,
-    required TResult Function(String text) error,
+    required TResult Function(String? text) loading,
+    required TResult Function(String? text) error,
   }) {
     return error(text);
   }
@@ -439,8 +413,8 @@ class _$Error with DiagnosticableTreeMixin implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String text)? item,
-    TResult Function(String text)? loading,
-    TResult Function(String text)? error,
+    TResult Function(String? text)? loading,
+    TResult Function(String? text)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -475,11 +449,9 @@ class _$Error with DiagnosticableTreeMixin implements Error {
 }
 
 abstract class Error implements ListItem {
-  const factory Error(String text) = _$Error;
+  const factory Error({String? text}) = _$Error;
 
-  @override
-  String get text => throw _privateConstructorUsedError;
-  @override
+  String? get text => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ErrorCopyWith<Error> get copyWith => throw _privateConstructorUsedError;
 }

@@ -3,6 +3,8 @@ import 'package:flutterdex/common/data/Resource.dart';
 import 'package:flutterdex/home/network/data/PokemonPage.dart';
 import 'package:flutterdex/home/presentation/uimodel/HomeState.dart';
 
+//TODO needs complete rewrite
+
 class HomeModel {
   PokemonPage _page = PokemonPage();
 

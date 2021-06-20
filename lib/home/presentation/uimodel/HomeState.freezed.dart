@@ -22,15 +22,15 @@ class _$HomeStateTearOff {
     );
   }
 
-  Loading loading(String text) {
+  Loading loading({String? text}) {
     return Loading(
-      text,
+      text: text,
     );
   }
 
-  Error error(String text) {
+  Error error({String? text}) {
     return Error(
-      text,
+      text: text,
     );
   }
 }
@@ -43,15 +43,15 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(List<ListItem> list) list,
-    required TResult Function(String text) loading,
-    required TResult Function(String text) error,
+    required TResult Function(String? text) loading,
+    required TResult Function(String? text) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<ListItem> list)? list,
-    TResult Function(String text)? loading,
-    TResult Function(String text)? error,
+    TResult Function(String? text)? loading,
+    TResult Function(String? text)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -157,8 +157,8 @@ class _$Data with DiagnosticableTreeMixin implements Data {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(List<ListItem> list) list,
-    required TResult Function(String text) loading,
-    required TResult Function(String text) error,
+    required TResult Function(String? text) loading,
+    required TResult Function(String? text) error,
   }) {
     return list(this.list);
   }
@@ -167,8 +167,8 @@ class _$Data with DiagnosticableTreeMixin implements Data {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<ListItem> list)? list,
-    TResult Function(String text)? loading,
-    TResult Function(String text)? error,
+    TResult Function(String? text)? loading,
+    TResult Function(String? text)? error,
     required TResult orElse(),
   }) {
     if (list != null) {
@@ -214,7 +214,7 @@ abstract class Data implements HomeState {
 abstract class $LoadingCopyWith<$Res> {
   factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
       _$LoadingCopyWithImpl<$Res>;
-  $Res call({String text});
+  $Res call({String? text});
 }
 
 /// @nodoc
@@ -231,20 +231,20 @@ class _$LoadingCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? text = freezed,
   }) {
     return _then(Loading(
-      text == freezed
+      text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 class _$Loading with DiagnosticableTreeMixin implements Loading {
-  const _$Loading(this.text);
+  const _$Loading({this.text});
 
   @override
-  final String text;
+  final String? text;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -280,8 +280,8 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(List<ListItem> list) list,
-    required TResult Function(String text) loading,
-    required TResult Function(String text) error,
+    required TResult Function(String? text) loading,
+    required TResult Function(String? text) error,
   }) {
     return loading(text);
   }
@@ -290,8 +290,8 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<ListItem> list)? list,
-    TResult Function(String text)? loading,
-    TResult Function(String text)? error,
+    TResult Function(String? text)? loading,
+    TResult Function(String? text)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -326,9 +326,9 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
 }
 
 abstract class Loading implements HomeState {
-  const factory Loading(String text) = _$Loading;
+  const factory Loading({String? text}) = _$Loading;
 
-  String get text => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $LoadingCopyWith<Loading> get copyWith => throw _privateConstructorUsedError;
 }
@@ -337,7 +337,7 @@ abstract class Loading implements HomeState {
 abstract class $ErrorCopyWith<$Res> {
   factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
       _$ErrorCopyWithImpl<$Res>;
-  $Res call({String text});
+  $Res call({String? text});
 }
 
 /// @nodoc
@@ -354,20 +354,20 @@ class _$ErrorCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
     Object? text = freezed,
   }) {
     return _then(Error(
-      text == freezed
+      text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 class _$Error with DiagnosticableTreeMixin implements Error {
-  const _$Error(this.text);
+  const _$Error({this.text});
 
   @override
-  final String text;
+  final String? text;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -403,8 +403,8 @@ class _$Error with DiagnosticableTreeMixin implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(List<ListItem> list) list,
-    required TResult Function(String text) loading,
-    required TResult Function(String text) error,
+    required TResult Function(String? text) loading,
+    required TResult Function(String? text) error,
   }) {
     return error(text);
   }
@@ -413,8 +413,8 @@ class _$Error with DiagnosticableTreeMixin implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<ListItem> list)? list,
-    TResult Function(String text)? loading,
-    TResult Function(String text)? error,
+    TResult Function(String? text)? loading,
+    TResult Function(String? text)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -449,9 +449,9 @@ class _$Error with DiagnosticableTreeMixin implements Error {
 }
 
 abstract class Error implements HomeState {
-  const factory Error(String text) = _$Error;
+  const factory Error({String? text}) = _$Error;
 
-  String get text => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ErrorCopyWith<Error> get copyWith => throw _privateConstructorUsedError;
 }

@@ -2,18 +2,22 @@ import 'package:flutterdex/common/data/PokeApiPage.dart';
 import 'package:flutterdex/home/network/PokemonPageDataSource.dart';
 import 'package:injectable/injectable.dart';
 
-@Named("local")
-@Injectable(as: PokeApiPageDataSource)
-class PokemonPageLocalDataSource extends PokeApiPageDataSource {
+@Injectable()
+class PokemonPageLocalDataSource extends LocalDataSource<PokeApiPage> {
   Map<int, PokeApiPage> _map = {};
 
   @override
-  void addPage(int offset, PokeApiPage page) {
+  bool contains(int offset) {
+    return _map.containsKey(offset);
+  }
+
+  @override
+  void store(int offset, PokeApiPage page) {
     _map.putIfAbsent(offset, () => page);
   }
 
   @override
-  Future<PokeApiPage?> getPage(int offset) async {
-    return _map[offset];
+  Future<PokeApiPage> get(int offset) async {
+    return _map[offset]!;
   }
 }

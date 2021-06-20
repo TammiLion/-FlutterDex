@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutterdex/common/data/PokeApiPage.dart';
-import 'package:flutterdex/home/network/PokemonPageNetworkDataSource.dart';
 import 'package:flutterdex/home/util/PokeApiPageMapper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../PokemonPageRepository.dart';
 
 part 'PokemonPage.freezed.dart';
 
@@ -13,7 +14,7 @@ class PokemonPage with _$PokemonPage {
   factory PokemonPage(
       {@Default(null) int? count,
       @Default(0) int? next,
-        @Default(0) int? previous,
+      @Default(0) int? previous,
       @Default([]) List<String> results}) = _PokemonPage;
 
   //Returns a new PokemonPage object with the given results inserted after

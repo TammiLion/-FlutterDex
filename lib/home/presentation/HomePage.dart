@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with RestorationMixin {
-  final RestorableInt _scrollPosition = RestorableInt(20);
+  final RestorableInt _scrollPosition = RestorableInt(20); //TODO it's on 20 now for testing
   final ScrollController _scrollController = ScrollController();
 
   @override
