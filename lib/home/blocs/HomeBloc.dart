@@ -37,6 +37,7 @@ class HomeBloc extends Cubit<HomeState> {
 
   void onRestore(int position) {
     _restorablePosition = position;
+    _model.restoreState(position); //TODO too error prone
     _handleRestoration();
   }
 
@@ -71,12 +72,14 @@ class HomeBloc extends Cubit<HomeState> {
 
   void _getResponseFromRepo(int offset) async {
     _isLoading = true;
-    _model.onResponse(Resource.loading());
+    emit(_model.onResponse(Resource.loading()));
     try {
       final response = await _repo.getPage(offset);
-      _model.onResponse(Resource(response));
+      emit(_model.onResponse(Resource(response.copyWith(offset: offset))));
     } on Exception {
-      _model.onResponse(Resource.error());
+      emit(_model.onResponse(Resource.error()));
+    } finally {
+      _isLoading = false;
     }
   }
 }

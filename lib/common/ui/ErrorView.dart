@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutterdex/common/ui/ClickSupport.dart';
-import 'package:flutterdex/common/util/extensions.dart';
 import 'package:flutterdex/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ErrorView extends StatelessWidget {
   final String? text;
@@ -12,14 +12,16 @@ class ErrorView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> widgets = [PlatformCircularProgressIndicator()];
-    text?.let((it) {
-      widgets.add(Text(it));
-    });
-    onClick?.let((it) {
-      widgets.add(ClickSupport(onClick: it, child: Text(LocaleKeys.error)));
-    });
+    if (onClick == null) {
+      return _error();
+    } else {
+      return ClickSupport(onClick: onClick!, child: _error());
+    }
+  }
 
-    return Center(child: Column(children: widgets));
+  Widget _error() {
+    return Center(
+        child: Column(
+            children: [Icon(Icons.error), Text(text ?? LocaleKeys.retry.tr())]));
   }
 }

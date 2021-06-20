@@ -9,5 +9,6 @@
   },
   "error": "An error occured",
   "loading": "Loading",
-  "title": "FlutterDex EN"
+  "title": "FlutterDex EN",
+  "retry": "Try again"
 }

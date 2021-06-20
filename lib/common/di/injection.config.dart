@@ -10,11 +10,11 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import '../../home/blocs/HomeBloc.dart' as _i10;
 import '../../home/network/PokemonPageCache.dart' as _i6;
-import '../../home/network/PokemonPageDataSource.dart' as _i8;
-import '../../home/network/PokemonPageRepository.dart' as _i7;
-import '../data/PokeApiPage.dart' as _i9;
-import '../network/api/ApiModule.dart' as _i5;
-import '../network/api/PokeApi.dart' as _i4;
+import '../../home/network/PokemonPageDataSource.dart' as _i4;
+import '../../home/network/PokemonPageRepository.dart' as _i9;
+import '../data/PokeApiPage.dart' as _i5;
+import '../network/api/ApiModule.dart' as _i8;
+import '../network/api/PokeApi.dart' as _i7;
 
 const String _dev = 'dev';
 const String _prod = 'prod';
@@ -27,16 +27,16 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final apiModule = _$ApiModule();
   gh.lazySingleton<_i3.Dio>(() => apiModule.getDio());
-  gh.lazySingleton<_i4.PokeApi>(() => apiModule.getPokeApi(get<_i3.Dio>()),
-      registerFor: {_dev, _prod});
-  gh.factory<_i4.PokeApi>(() => _i5.MockPokeApi(), registerFor: {_test});
-  gh.factory<_i6.PokemonPageLocalDataSource>(
+  gh.factory<_i4.LocalDataSource<_i5.PokeApiPage>>(
       () => _i6.PokemonPageLocalDataSource());
-  gh.lazySingleton<_i7.PokemonPageRepository>(() => _i7.PokemonPageRepository(
-      get<_i4.PokeApi>(), get<_i8.LocalDataSource<_i9.PokeApiPage>>()));
+  gh.lazySingleton<_i7.PokeApi>(() => apiModule.getPokeApi(get<_i3.Dio>()),
+      registerFor: {_dev, _prod});
+  gh.factory<_i7.PokeApi>(() => _i8.MockPokeApi(), registerFor: {_test});
+  gh.lazySingleton<_i9.PokemonPageRepository>(() => _i9.PokemonPageRepository(
+      get<_i7.PokeApi>(), get<_i4.LocalDataSource<_i5.PokeApiPage>>()));
   gh.factory<_i10.HomeBloc>(
-      () => _i10.HomeBloc(get<_i7.PokemonPageRepository>()));
+      () => _i10.HomeBloc(get<_i9.PokemonPageRepository>()));
   return get;
 }
 
-class _$ApiModule extends _i5.ApiModule {}
+class _$ApiModule extends _i8.ApiModule {}

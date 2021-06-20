@@ -2,7 +2,7 @@ import 'package:flutterdex/common/data/PokeApiPage.dart';
 import 'package:flutterdex/home/network/PokemonPageDataSource.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable()
+@Injectable(as: LocalDataSource)
 class PokemonPageLocalDataSource extends LocalDataSource<PokeApiPage> {
   Map<int, PokeApiPage> _map = {};
 

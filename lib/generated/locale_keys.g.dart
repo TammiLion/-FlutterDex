@@ -8,5 +8,6 @@ abstract class  LocaleKeys {
   static const error = 'error';
   static const loading = 'loading';
   static const title = 'title';
+  static const retry = 'retry';
 
 }

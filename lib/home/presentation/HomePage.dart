@@ -20,31 +20,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with RestorationMixin {
-  final RestorableInt _scrollPosition = RestorableInt(20); //TODO it's on 20 now for testing
-  final ScrollController _scrollController = ScrollController();
+  final RestorableInt _scrollPosition =
+      RestorableInt(20); //TODO it's on 20 now for testing
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _restoreState();
-    _setupScrollListener();
   }
 
   void _restoreState() {
     context.read<HomeBloc>().onRestore(_scrollPosition.value);
-  }
-
-  void _setupScrollListener() {
-    _scrollController.addListener(() {
-      if (_scrollController.position.atEdge) {
-        _scrollPosition.value++;
-        if (_scrollController.position.pixels == 0) {
-          context.read<HomeBloc>().onStartOfPage();
-        } else {
-          context.read<HomeBloc>().onEndOfPage();
-        }
-      }
-    });
   }
 
   @override
@@ -70,11 +56,14 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
     return state.when(
         list: (list) => HomeList(
             list: list,
-            scrollController: _scrollController,
             onClickPokemon: (name) => _navigateToPokemonPage(name),
             onClickError: _retry),
-        loading: (text) => LoadingView(text: text),
-        error: (text) => ErrorView(text: text, onClick: () => _retry()));
+        loading: (text) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [LoadingView(text: text)]),
+        error: (text) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [ErrorView(text: text, onClick: () => _retry())]));
   }
 
   void _retry() {

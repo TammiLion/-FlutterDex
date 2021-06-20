@@ -9,5 +9,6 @@
   },
   "error": "Er is iets fout gegaan",
   "loading": "Laden",
-  "title": "FlutterDex NL"
+  "title": "FlutterDex NL",
+  "retry": "Probeer opnieuw"
 }
