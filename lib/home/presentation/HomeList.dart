@@ -22,12 +22,14 @@ class HomeList extends StatelessWidget {
   final List<ListItem> list;
   final Function(String name) onClickPokemon;
   final Function() onClickError;
+  final Function(int value) storeScrollPosition;
 
   const HomeList(
       {Key? key,
         required this.list,
       required this.onClickPokemon,
-      required this.onClickError});
+      required this.onClickError,
+      required this.storeScrollPosition});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class HomeList extends StatelessWidget {
         itemBuilder: (BuildContext _context, int i) {
           return list[i].when(
               item: (text) {
-                //TODO restorablePosition
+                storeScrollPosition(i);
                 if (i == 0) {
                   context.read<HomeBloc>().onStartOfPage();
                 } else if (i == list.length-1) {

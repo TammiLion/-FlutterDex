@@ -26,21 +26,22 @@ void main() async {
 }
 
 class FlutterDexApp extends StatelessWidget {
+  final BlocProvider homeProvider =
+      BlocProvider<HomeBloc>(create: (_) => getIt<HomeBloc>());
+
   @override
   Widget build(BuildContext context) {
     Widget modularApp = Platform.isAndroid
         ? _getMaterialApp(context)
         : _getCupertinoApp(context);
 
-    return MultiBlocProvider(
-        providers: [BlocProvider<HomeBloc>(create: (_) => getIt<HomeBloc>())],
-        child: modularApp);
+    return MultiBlocProvider(providers: [homeProvider], child: modularApp);
   }
 }
 
 Widget _getMaterialApp(BuildContext context) {
   return MaterialApp(
-      initialRoute: "/pokemon",
+          initialRoute: "/pokemon",
           restorationScopeId: 'app',
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,

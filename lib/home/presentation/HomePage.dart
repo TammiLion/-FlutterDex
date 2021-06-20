@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
   }
 
   void _restoreState() {
+    print("SCROLLPOSITION VALUE ${_scrollPosition.value}");
     context.read<HomeBloc>().onRestore(_scrollPosition.value);
   }
 
@@ -37,6 +38,10 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
   void dispose() {
     _scrollPosition.dispose();
     super.dispose();
+  }
+
+  void _storeState(int value) {
+    _scrollPosition.value = value;
   }
 
   @override
@@ -57,7 +62,8 @@ class _HomePageState extends State<HomePage> with RestorationMixin {
         list: (list) => HomeList(
             list: list,
             onClickPokemon: (name) => _navigateToPokemonPage(name),
-            onClickError: _retry),
+            onClickError: _retry,
+            storeScrollPosition: _storeState),
         loading: (text) => Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [LoadingView(text: text)]),
