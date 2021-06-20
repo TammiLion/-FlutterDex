@@ -6,10 +6,13 @@ import 'package:mockito/mockito.dart';
 
 @module
 abstract class ApiModule {
+
   @lazySingleton
   Dio getDio() {
     final dio = Dio();
     dio.options.headers["Demo-Header"] = "demo header";
+    dio.options.connectTimeout = 5000;
+    dio.options.receiveTimeout = 30000;
     if (kDebugMode) {
       dio.interceptors.add(
           LogInterceptor(request: true, requestBody: true, responseBody: true));
